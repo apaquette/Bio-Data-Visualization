@@ -1,0 +1,27 @@
+---
+title: "BioDataVisualization"
+author: "apaquette"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+
+# Research Question
+
+
+# Rationale
+
+
+# Data Presentation
+
+
+# Data Manipulation
+
+
+# Conclusion
