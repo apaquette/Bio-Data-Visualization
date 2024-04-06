@@ -3,8 +3,8 @@ title: "BioDataVisualization"
 author: "apaquette"
 date: "`r Sys.Date()`"
 output:
-  github_document: default
   word_document: default
+  github_document: default
 ---
 
 ```{r setup, include=FALSE}
