@@ -1,4 +1,4 @@
-﻿Plant Name,Scientific Name,Group,Plant Type,Control/Experimental,final root length avg,sprout length avg (cm),number of roots over all,number of sprouts over all,Change in week 1,change in week 2,change in week 3,change in week 4,root grouth average,sprout avarage,seed amount
+﻿Common Name,Scientific Name,Group,Plant Type,Control/Experimental,final root length avg,sprout length avg (cm),number of roots over all,number of sprouts over all,Change in week 1,change in week 2,change in week 3,change in week 4,root grouth average,sprout avarage,seed amount
 Sweet pea,,A,monocot,control,,,,,,,,,,,
 Sweet pea,,B,monocot,control,,,,,,,,,,,
 Garlic,,A,monocot,control,,,,,,,,,,,
@@ -15,5 +15,5 @@ Onion,,A,monocot,control,,,,,,,,,,,
 Onion,,B,monocot,control,,,,,,,,,,,
 Basil,,A,monocot,control,,,,,,,,,,,
 Basil,,B,monocot,control,,,,,,,,,,,
-Arabidopidis,,A,monocot,control,,,,,,,,,,,
-Arabidopidis,,B,monocot,control,,,,,,,,,,,
+Thale Cress,Arabidopsis thaliana,A,monocot,control,,,,,,,,,,,
+Thale Cress,Arabidopsis thaliana,B,monocot,control,,,,,,,,,,,
