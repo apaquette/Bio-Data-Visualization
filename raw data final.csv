@@ -1,20 +1,20 @@
 ﻿Common Name,Scientific Name,Group,Plant Type,Control/Experimental,final root length avg,sprout length avg (cm),number of roots over all,number of sprouts over all,Change in week 1,change in week 2,change in week 3,change in week 4,root grouth average,sprout avarage,seed amount,seed amount variation ±
-Sweet pea,,A,monocot,control,,,,,,,,,,,,
-Sweet pea,,B,monocot,control,,,,,,,,,,,,
-Garlic,,A,monocot,control,,,,,,,,,,,,
-Garlic,,B,monocot,control,,,,,,,,,,,,
-Wheat,,A,monocot,control,,6.5,6,2,0,,,,,,4,0
-Wheat,,B,monocot,control,,6.25,17,4,0,,,,,,3,0
-Rye,,A,monocot,control,,,12,2,0,,,,,,4,0
-Rye,,B,monocot,control,,,9,1,0,,,,,,4,0
-Maze,,A,monocot,control,,,8,2,0,,,,,,3,0
-Maze,,B,monocot,control,,,7,3,0,,,,,,3,0
-Cabbage,,A,monocot,control,,,,,,,,,,,,
-Cabbage,,B,monocot,control,,,,,,,,,,,,
-Onion,,A,monocot,control,,,,,,,,,,,,
-Onion,,B,monocot,control,,,,,,,,,,,,
-Basil,,A,monocot,control,,,,,,,,,,,,
-Basil,,B,monocot,control,,,,,,,,,,,,
+Sweet pea,Lathyrus odoratus,A,monocot,control,,,,,,,,,,,,
+Sweet pea,Lathyrus odoratus,B,monocot,control,,,,,,,,,,,,
+Garlic,Allium tuberosum,A,monocot,control,,,,,,,,,,,,
+Garlic,Allium tuberosum,B,monocot,control,,,,,,,,,,,,
+Wheat,Triticum aestivum,A,monocot,control,,6.5,6,2,0,,,,,,4,0
+Wheat,Triticum aestivum,B,monocot,control,,6.25,17,4,0,,,,,,3,0
+Rye,Secale cereale,A,monocot,control,,,12,2,0,,,,,,4,0
+Rye,Secale cereale,B,monocot,control,,,9,1,0,,,,,,4,0
+Maze,Zea mays,A,monocot,control,,,8,2,0,,,,,,3,0
+Maze,Zea mays,B,monocot,control,,,7,3,0,,,,,,3,0
+Cabbage,Brassica oleracea var. capitata,A,monocot,control,,,,,,,,,,,,
+Cabbage,Brassica oleracea var. capitata,B,monocot,control,,,,,,,,,,,,
+Onion,Allium cepa,A,monocot,control,,,,,,,,,,,,
+Onion,Allium cepa,B,monocot,control,,,,,,,,,,,,
+Basil,Ocimum basilicum,A,monocot,control,,,,,,,,,,,,
+Basil,Ocimum basilicum,B,monocot,control,,,,,,,,,,,,
 Thale Cress,Arabidopsis thaliana,A,monocot,control,,,,,0,,,,,,20,5
 Thale Cress,Arabidopsis thaliana,B,monocot,control,,,,,0,,,,,,20,5
 Sage,salvia sommrrzisnsis,A,,,,,,,,,,,,,6,0
