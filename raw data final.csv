@@ -7,21 +7,21 @@ Wheat,Triticum aestivum,A,monocot,control,,6.5,6,2,0,,,,,,4,0
 Wheat,Triticum aestivum,B,monocot,control,,6.25,17,4,0,,,,,,3,0
 Rye,Secale cereale,A,monocot,control,,,12,2,0,,,,,,4,0
 Rye,Secale cereale,B,monocot,control,,,9,1,0,,,,,,4,0
-Maze,Zea mays,A,monocot,control,,,8,2,0,,,,,,3,0
-Maze,Zea mays,B,monocot,control,,,7,3,0,,,,,,3,0
+Maize,Zea mays,A,monocot,control,,,8,2,0,,,,,,3,0
+Maize,Zea mays,B,monocot,control,,,7,3,0,,,,,,3,0
 Cabbage,Brassica oleracea var. capitata,A,monocot,control,,,,,,,,,,,,
 Cabbage,Brassica oleracea var. capitata,B,monocot,control,,,,,,,,,,,,
 Onion,Allium cepa,A,monocot,control,,,,,,,,,,,,
 Onion,Allium cepa,B,monocot,control,,,,,,,,,,,,
 Basil,Ocimum basilicum,A,monocot,control,,,,,,,,,,,,
 Basil,Ocimum basilicum,B,monocot,control,,,,,,,,,,,,
-Thale Cress,Arabidopsis thaliana,A,monocot,control,,,,,0,,,,,,20,5
-Thale Cress,Arabidopsis thaliana,B,monocot,control,,,,,0,,,,,,20,5
-Sage,salvia sommrrzisnsis,A,,,,,,,,,,,,,6,0
-Sage,salvia sommrrzisnsis,B,,,,,,,,,,,,,6,0
+Thale Cress,Arabidopsis thaliana,A,monocot,control,,,,,0,,,,,,30,5
+Thale Cress,Arabidopsis thaliana,B,monocot,control,,,,,0,,,,,,30,5
+Sage,salvia sommrrzisnsis,A,,,0,0,0,0,0,,,,,,6,0
+Sage,salvia sommrrzisnsis,B,,,0,0,0,0,0,,,,,,6,0
 Succulent,echeveria sedum,A,,,,,,,,,,,,,,
 Succulent,echeveria sedum,B,,,,,,,,,,,,,,
-Snapdragon,antirrhinum majus,A,,,,,,,,,,,,,10,3
-snapdragon,antirrhinum majus,B,,,,,,,,,,,,,10,3
+Snapdragon,antirrhinum majus,A,,,0,0,0,0,0,,,,,,10,3
+snapdragon,antirrhinum majus,B,,,0,0,0,0,0,,,,,,10,3
 ,,,,,,,,,,,,,,,5,0
 ,,,,,,,,,,,,,,,5,0
