@@ -3,23 +3,25 @@ Sweet pea,,A,monocot,control,,,,,,,,,,,
 Sweet pea,,B,monocot,control,,,,,,,,,,,
 Garlic,,A,monocot,control,,,,,,,,,,,
 Garlic,,B,monocot,control,,,,,,,,,,,
-Wheat,,A,monocot,control,,6.5,6,2,0,,,,,,
-Wheat,,B,monocot,control,,6.25,17,4,0,,,,,,
+Wheat,,A,monocot,control,,6.5,6,2,0,,,,,,4
+Wheat,,B,monocot,control,,6.25,17,4,0,,,,,,3
 Rye,,A,monocot,control,,,12,2,0,,,,,,4
 Rye,,B,monocot,control,,,9,1,0,,,,,,4
-Maze,,A,monocot,control,,,8,2,0,,,,,,
-Maze,,B,monocot,control,,,7,3,0,,,,,,
+Maze,,A,monocot,control,,,8,2,0,,,,,,3
+Maze,,B,monocot,control,,,7,3,0,,,,,,3
 Cabbage,,A,monocot,control,,,,,,,,,,,
 Cabbage,,B,monocot,control,,,,,,,,,,,
 Onion,,A,monocot,control,,,,,,,,,,,
 Onion,,B,monocot,control,,,,,,,,,,,
 Basil,,A,monocot,control,,,,,,,,,,,
 Basil,,B,monocot,control,,,,,,,,,,,
-Thale Cress,Arabidopsis thaliana,A,monocot,control,,,,,,,,,,,
-Thale Cress,Arabidopsis thaliana,B,monocot,control,,,,,,,,,,,
-Sage,salvia sommrrzisnsis,A,,,,,,,,,,,,,
-Sage,salvia sommrrzisnsis,B,,,,,,,,,,,,,
+Thale Cress,Arabidopsis thaliana,A,monocot,control,,,,,0,,,,,,20±5
+Thale Cress,Arabidopsis thaliana,B,monocot,control,,,,,0,,,,,,20±5
+Sage,salvia sommrrzisnsis,A,,,,,,,,,,,,,6
+Sage,salvia sommrrzisnsis,B,,,,,,,,,,,,,6
 Succulent,echeveria sedum,A,,,,,,,,,,,,,
 Succulent,echeveria sedum,B,,,,,,,,,,,,,
-Snapdragon,antirrhinum majus,A,,,,,,,,,,,,,
-snapdragon,antirrhinum majus,B,,,,,,,,,,,,,
+Snapdragon,antirrhinum majus,A,,,,,,,,,,,,,10±3
+snapdragon,antirrhinum majus,B,,,,,,,,,,,,,10±3
+,,,,,,,,,,,,,,,5
+,,,,,,,,,,,,,,,5
