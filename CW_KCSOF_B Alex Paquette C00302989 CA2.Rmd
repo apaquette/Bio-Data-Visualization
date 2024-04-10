@@ -13,7 +13,9 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 \newpage
+
 # Introduction
 
 Data visualization is a fundamental tool across a multitude of disciplines, serving as a conduit for conveying complex information in a visually accessible manner. In scientific research, where the exploration and interpretation of data are paramount, effective visualization techniques play a pivotal role in illuminating patterns, trends, and relationships within datasets. By transforming raw data into intuitive visual representations, researchers can gain deeper insights into their findings and communicate them with clarity and precision. In this report, we embark on a journey through the process of producing visualizations for scientific research, unraveling the methodologies and strategies that underpin the creation of impactful visual narratives.
