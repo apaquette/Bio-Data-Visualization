@@ -1,8 +1,9 @@
 # Bio Data Visualization
 
-### Authors
+### Author
 Alex Paquette
 
+### Contributors
 Olivia Bain
 
 ### Date Created
