@@ -1,18 +1,19 @@
 ---
-title: "Visualization in Scientific Studies"
+title: "Enhancing Scientific Inquiry with R for Data Manipulation and Visualization"
 author: "Alexandre Paquette"
 contributor: "Olivia Josephine Bain"
 professor: "Agnes Maciocha"
 date: "`r Sys.Date()`"
 output:
-  word_document: default
+  word_document:
+    toc: true
   github_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+\newpage
 # Introduction
 
 Data visualization is a fundamental tool across a multitude of disciplines, serving as a conduit for conveying complex information in a visually accessible manner. In scientific research, where the exploration and interpretation of data are paramount, effective visualization techniques play a pivotal role in illuminating patterns, trends, and relationships within datasets. By transforming raw data into intuitive visual representations, researchers can gain deeper insights into their findings and communicate them with clarity and precision. In this report, we embark on a journey through the process of producing visualizations for scientific research, unraveling the methodologies and strategies that underpin the creation of impactful visual narratives.
@@ -33,17 +34,21 @@ This real-world case study serves as the foundation for our exploration of data 
 
 # Research Question
 
--   How do we take real-world data for a real scientific study, process the data, and visualize it?
+The focal point of our investigation revolves around a central research question: How do we effectively transform real-world data from scientific studies into meaningful visual representations that facilitate insight and understanding? This inquiry stems from the imperative to distill scientific data into actionable insights, particularly within the context of scientific research.
 
 ## Rationale Behind the Study
 
--   We need to display the relationship between bio-priming seeds and the overall health of the plant at germination
--   visualizing the data helps us visibly compare root length averages and growth overtime compared to the control non-exposed plants
+Our study aims to shed light on the process of taking real-world data from a scientific study, manipulating it to extract meaningful insights, and visualizing these insights for enhanced comprehension. Specifically, our interest lies in exploring the relationship between the application of bio-priming agents on seeds and the resulting health and vigor of plants during the germination stage.
+
+Data visualization serves as a powerful tool in this endeavor, enabling us to visually compare growth parameters and trends between bio-primed seeds and control non-exposed plants. Through visual representations, we seek to uncover patterns, trends, and correlations within the data, providing valuable insights into the efficacy of bio-priming as a plant growth promoter.
 
 ## Methodology
 
--   we do this by looking at root and sprout growth (length, size, coloration)
--   to determine if there are differing affects on monocot and dicot plants
+Our methodology revolves around leveraging programming tools, specifically R and relevant libraries, to manipulate and visualize the data obtained from the scientific study. By harnessing the capabilities of R programming and associated libraries, we aim to streamline the data processing and visualization workflows, facilitating efficient analysis and interpretation of the dataset.
+
+The specific libraries and techniques employed will be determined based on the nature of the data and the visualization requirements. However, our methodology will prioritize clarity, accuracy, and reproducibility, ensuring that the visualizations produced effectively communicate the insights derived from the data.
+
+This approach allows us to not only explore the intricacies of data manipulation and visualization within the context of scientific research but also lays the foundation for future research endeavors in data-driven inquiry.
 
 # Data Manipulation
 
@@ -52,8 +57,6 @@ This real-world case study serves as the foundation for our exploration of data 
 # Conclusion
 
 # Glossary of Terms
-
-## Biology
 
 Bio-priming
 
@@ -70,7 +73,3 @@ Dicot plant
 Embryonic leaf
 
 :   The plant embryo, also known as cotyledon
-
-## Visualization
-
-## Data Science
