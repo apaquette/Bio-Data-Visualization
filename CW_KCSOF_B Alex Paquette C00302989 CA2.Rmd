@@ -42,7 +42,7 @@ The focal point of our investigation revolves around a central research question
 
 Our study aims to shed light on the process of taking real-world data from a scientific study, manipulating it to extract meaningful insights, and visualizing these insights for enhanced comprehension. Specifically, our interest lies in exploring the relationship between the application of a PGPB (Plant Growth Promoting Bacteria) consortium as a biopriming agent on the seeds of various plant species and the resulting health and vigor of plants during the germination growth stage of the plant life.
 
-Data visualization serves as a powerful tool in this endeavor, enabling us to visually compare growth parameters and trends between experimental bioprimed seeds and control non-exposed seeds. Through visual representations, we seek to uncover patterns, trends, and correlations within the data, providing valuable insights into the efficacy of biopriming with PGPB as a plant growth promoter.
+Data visualization serves as a powerful tool in this endeavor, enabling us to visually compare growth parameters and trends between experimental bioprimed seeds and control non-exposed seeds. Through visual representations, we seek to uncover patterns, trends, and correlations within the growth data, providing valuable insights into the efficacy of biopriming with PGPB as a plant growth promoter.
 
 ## Methodology
 
@@ -60,9 +60,9 @@ This approach allows us to not only explore the intricacies of data manipulation
 
 # Glossary of Terms
 
-Bio-priming
+Biopriming
 
-:   The process of coating the seed with a plant-growth promoting bacteria consortium
+:   The process of coating the seed with a plant-growth promoting bacteria consortium comprised of Basillus ceres and pusdomonas
 
 Monocot plant
 
