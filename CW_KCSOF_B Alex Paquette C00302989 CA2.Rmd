@@ -54,6 +54,26 @@ This approach allows us to not only explore the intricacies of data manipulation
 
 # Data Manipulation
 
+```{r}
+install.packages("dplyr")
+```
+
+
+```{r}
+library(dplyr)
+```
+
+Load the data from the .csv and save it in a variable
+```{r}
+bioData <- read.csv("rawData.csv")
+```
+
+
+```{r}
+bioData
+```
+
+
 # Data Presentation
 
 # Conclusion
