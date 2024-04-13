@@ -1,82 +1,82 @@
-﻿Common Name,Scientific Name,Group,Plant Type,Control/Experimental,number of roots over all,number of sprouts over all,Change in week 1 (sprout),change in week 2 (sprout),change in week 3 (sprout),change in week 4 (sprout),seed amount,seed amount variation ±,Change in week 1 (root),change in week 2 (root),change in week 3 (root),change in week 4 (root),Indavidual lengrths (roots),Indavidual langth (sprouts),average root length,average sproot length
-Sweet pea,Lathyrus odoratus,A,Dicot,control,,,,,,,4,,,,,,,,,
-Sweet pea,Lathyrus odoratus,B,Dicot,control,4,,,,,,4,,0.5,1,1.5,1.6,"3.5, 7.2, 1.8, 5.9",,4.6,
-Garlic,Allium tuberosum,A,monocot,control,1,,,,,,5,,,1.5,2,1.2,4.7,,4.7,
-Garlic,Allium tuberosum,B,monocot,control,2,1,,2,2.5,1.8,5,,,1.3,2.3,1.4,"3.9, 6.1",6.3,5,
-Wheat,Triticum aestivum,A,monocot,control,6,2,1.2,1.8,1.5,1.85,4,,0.7,1.2,1.3,1.7,"5.6, 5.8, 4.7, 7.3, 4.2, 2.1","6.2, 6.5",4.9,6.35
-Wheat,Triticum aestivum,B,monocot,control,17,4,0.8,1.2,2.62,2.5,3,,0.4,1,1.1,2.1,"2.3, 5.6, 1, 8.9, 4.2, 7.7, 0.5,9.2, 3.4, 6.1, 2.8, 5.3, 1.7, 8, 4.9, 7.4, 0.2","8, 5.7, 8.2, 6.6",4.6,
-Rye,Secale cereale,A,monocot,control,7,2,,1,3.5,1.5,4,,0.8,1.4,2.2,1,"    2.3,6.8, 4.5,1.9,8.1,3.7,9.4","    4.2,7.8",5.42,
-Rye,Secale cereale,B,monocot,control,9,1,1.2,2.5,1.8,3.8,4,,1,1.3,2.1,1.1,"    2.6,5.4,8.1,1.7,4.9,7.2,3.3,6.5,9.8",9.3,5.5,
-Maize,Zea mays,A,monocot,control,8,2,,1,2.85,3,3,,,1.2,1.9,2.12,"    1.8,4.3, 7.9,3.6,6.1,9.2, 2.7,5.4","6.2,7.5",5.12,
-Maize,Zea mays,B,monocot,control,7,3,,1.8,1.7,2.4,3,,,1.4,1.5,1.5,"    3.2,7.5,1.6,9.8,5.1,2.4,8.7","5.3,5.9,6.5",5.47,
-Cabbage,Brassica oleracea var. capitata,A,dicot,control,4,2,,0.65,2.8,1.5,6,,,0.45,1.2,2,"2.5, 4.1, 7.2, 0.8","3.2, 6.7",3.65,
-Cabbage,Brassica oleracea var. capitata,B,dicot,control,3,3,,0.93,1.8,2.7,6,,,1.4,2.1,2.3,"8.1, 6.5,  3.2","2.6, 5.4, 8.3",5.9,
-Onion,Allium cepa,A,monocot,control,4,4,1.2,0.8,1.27,2.5,5,,0.4,1.3,1.6,1.4,"2.7, 5.4, 3.6, 7.1","1.8, 4.5,7.2, 9.6",4.7,
-Onion,Allium cepa,B,monocot,control,5,4,,1.67,2,2.5,5,,0.5,1.1,2.3,1.2,"3.2, 4.8, 6.3, 8.7, 2.5","2.3, 5.1, 7.9, 9.4",5.1,
-Basil,Ocimum basilicum,A,Dicot,control,2,1,0.8,1.5,2.1,3,6,,,1.6,1.4,1.05,"2.4, 5.7",7.4,4.05,
-Basil,Ocimum basilicum,B,Dicot,control,3,3,,1.4,1,2.4,6,,,1.3,1.7,2,"3.9, 6.2, 4.9","1.7, 4.2, 8.5",5,
-Thale Cress,Arabidopsis thaliana,A,monocot,control,2,20,,0.5,0.41,0.2,30,5,,0.25,2.2,2.7,"5.8, 4.7","1.63,1.14, 0.92, 0.27,1.88,0.46, 1.72,  0.81, 0.35,  0.59,1.95,1.28, 1.07, 1.41, 0.75, 1.99, 0.13, 1.55
-, 0.64,1.83",5.15,
-Thale Cress,Arabidopsis thaliana,B,monocot,control,6,25,,0.2,0.5,0.28,30,5,,0.55,2.1,2.5,"5.1, 4.6, 1.8, 5.5, 7.2, 6.7","    1.47, 0.82, 0.25, 1.36, 0.54, 0.94, 1.82, 0.67, 0.11, 1.73, 0.37, 1.25, 0.76, 1.64, 1.05, 0.41, 0.29, 1.93, 1.11, 0.49, 1.17, 0.73, 0.18, 1.55, 1.88",5.15,
-Sage,salvia sommrrzisnsis,A,Dicot,control,,,,,,,6,,,,,,,,,
-Sage,salvia sommrrzisnsis,B,Dicot,control,,,,,,,6,,,,,,,,,
-Succulent,echeveria sedum,A,Dicot,control,2,,,,,,6,,,0.6,0.9,1.1,"1.3, 3.9",,2.6,
-Succulent,echeveria sedum,B,Dicot,control,5,2,0.55,2.4,3,1.1,6,,,0.32,1.2,1.8,"1.7, 4.3, 6.8, 3.2, 0.6","5.8, 7.3",3.32,
-Snapdragon,antirrhinum majus,A,Dicot,control,,,,,,,10,3,,,,,,,,
-snapdragon,antirrhinum majus,B,Dicot,control,,,,,,,10,3,,,,,,,,
-Honeyworts,Cerinthe major,A,Dicot,control,,,,,,,4,,,,,,,,,
-Honeyworts,Cerinthe major,B,Dicot,control,,,,,,,4,,,,,,,,,
-Kingfisher dasey,Felicia amelloides,A,Dicot,control,,,,,,,5,,,,,,,,,
-Kingfisher dasey,Felicia amelloides,B,Dicot,control,,,,,,,5,,,,,,,,,
-Petunia,Petunia integrifolia,A,Dicot,control,7,3,,1.7,1.8,1.23,5,,,0.37,1.5,2.7,"6.2, 5.6, 7.3, 1.4, 4.8, 6.4, 0.3","    4.7, 1.2, 8.3",4.57,
-Petunia,Petunia integrifolia,B,Dicot,control,9,3,0.13,1.7,1.3,2,5,,0.08,0.2,1.2,2.3,"1.2, 3.5, 6.8, 2.3, 4.6, 5.7, 0.9, 5.1, 4","    5.9, 2.4, 7.1",3.78,
-Tomato,Solanum lycopersicum,A,Dicot,control,,,,,,,5,,,,,,,,,
-Tomato,Solanum lycopersicum,B,Dicot,control,4,1,0.7,1.2,1.4,2.8,5,,,1.3,3,1.9,"3.5, 4.2, 7.8, 9.3",6.1,6.2,
-Common Sunflower,Helianthus annuus,A,Dicot,control,1,,,,,,3,,,1,2.5,2.2,5.7,,5.7,
-Common Sunflower,Helianthus annuus,B,Dicot,control,2,1,1.5,2,3.2,2.2,3,,,0.8,1.3,2.4,"3.9, 5.1",8.9,4.5,
-Bearded Iris,Iris × germanica,A,monocot,control,,,,,,,5,,,,,,,,,
-Bearded Iris,Iris × germanica,B,monocot,control,,,,,,,5,,,,,,,,,
-Daffodil,Narcissus pseudonarcissus,A,monocot,control,4,3,,1.5,2.1,1.9,5,,,0.57,1.8,2.7,"5.2, 5.9, 7.4, 1.8","    3.8, 6.5, 9.2",5.07,
-Daffodil,Narcissus pseudonarcissus,B,monocot,control,3,2,,1.8,1.9,1.4,5,,,0.26,1.2,2.1,"1.7, 4.3, 6.7","    4.3, 7.9",3.56,
-purple Loosestrife,Lythrum salicaria,A,dicot,control,2,1,,1.3,1.8,3.7,5,,,1.5,4.1,2.4,"6.4, 9.6",6.8,8,
-Purple Loosestrife,Lythrum salicaria,B,dicot,control,,,,,,,5,,,,,,,,,
-Sweet pea,Lathyrus odoratus,A,Dicot,Experimental,1,,,,,,4,,,0.6,2.1,2.4,5.1,,5.1,
-Sweet pea,Lathyrus odoratus,B,Dicot,Experimental,2,1,,1.5,1.7,2,4,,,1.1,3.2,1.8,"2.8, 4.4",5.2,6.1,
-Garlic,Allium tuberosum,A,monocot,Experimental,1,,,,,,5,,,1.2,3.2,2.3,6.7,,6.7,
-Garlic,Allium tuberosum,B,monocot,Experimental,1,2,0.4,1.3,2.8,1.2,5,,,1.1,3.5,2.8,7.4,"4.8, 6.7",7.4,
-Wheat,Triticum aestivum,A,monocot,Experimental,6,1,1.5,2,2.5,1.5,4,,0.5,1,1.1,1.1,"5.1,2.6,4.4,2.3,1.7,5.8",8.5,,
-Wheat,Triticum aestivum,B,monocot,Experimental,4,2,1.1,3.6,1.3,2.7,3,,0.6,1,1.5,2,"6.2, 4.1, 5.3, 5","8.2, 9.3",5.1,
-Rye,Secale cereale,A,monocot,Experimental,2,2,1.2,1.5,1.5,1.8,4,,0.8,1.5,1.65,2,"    4.7,7.2","7.7, 5.4",,
-Rye,Secale cereale,B,monocot,Experimental,3,2,,0.8,3.2,2.3,4,,1,1.5,2,1.7,"    6.3,2.8,9.5","5.9, 6.8",,
-Maize,Zea mays,A,monocot,Experimental,2,2,,1.6,1.9,1.1,3,,0.5,1,2,1.85,"5.2,5.5","4.3,4.9",,
-Maize,Zea mays,B,monocot,Experimental,3,2,,0.7,1.5,1.9,3,,,1.5,1,3.5,"5.8,6.2","3.7,4.5",,
-Cabbage,Brassica oleracea var. capitata,A,dicot,Experimental,2,1,0.5,0.7,0.8,1.2,6,,,1,1.8,2.6,"4.2, 6.6",3.2,5.4,
-Cabbage,Brassica oleracea var. capitata,B,dicot,Experimental,3,1,0.7,1,1.2,2.2,6,,,0.6,1.4,2.9,"3.5, 6.1, 5.3",5.1,4.9,
-Onion,Allium cepa,A,monocot,Experimental,1,,,,,,5,,,0.2,0.8,1.2,2.2,,2.2,
-Onion,Allium cepa,B,monocot,Experimental,4,2,1,2.4,2.2,2.6,5,,0.05,0.4,1.4,1.6,"1.8, 4.6, 7.3, 0.9","7.2, 9.3",3.65,
-Basil,Ocimum basilicum,A,Dicot,Experimental,2,1,0.3,0.5,1.2,0.8,6,,,0.15,1.3,2.2,"2.4, 7.1",2.8,4.75,
-Basil,Ocimum basilicum,B,Dicot,Experimental,2,3,,0.5,0.3,0.7,6,,,0.6,1,2.2,"5.7, 1.9","2.3, 1.6, 0.8",3.8,
-Thale Cress,Arabidopsis thaliana,A,monocot,Experimental,7,27,,0.3,0.7,0.2,30,5,0.08,0.1,1.4,2.4,"1.2, 3.5, 5.8, 1.7, 4.8, 7.9, 2.3","    2,0.8,1.4,1.9,0.2,1.7,0.6, 2.1,1.1,0.5,2.3,0.9,1.6, 0.3,1.1, 2.2, 0.7,1.8, 0.4, 1.5, 0.9, 2.4, 1.3, 0.5, 2, 1.2, 0.7",3.88,
-Thale Cress,Arabidopsis thaliana,B,monocot,Experimental,5,22,,,0.6,0.5,30,5,,0.4,1.1,2.6,"1.5, 3.8, 6.2, 5.8, 3.2","    0.8,1.4,0.3,2.1,1,0.6,2.2,0.4,1.1,0.9,1.7,0.2,1.9,0.5,2.3,1.2,0.1,1.8,0.7, 2,1.4,0.8",4.1,
-Sage,salvia sommrrzisnsis,A,Dicot,Experimental,,,,,,,6,,,,,,,,,
-Sage,salvia sommrrzisnsis,B,Dicot,Experimental,,,,,,,6,,,,,,,,,
-Succulent,echeveria sedum,A,Dicot,Experimental,2,,,,,,6,,,0.4,2.6,3.5,"7.1, 5.8",,6.45,
-Succulent,echeveria sedum,B,Dicot,Experimental,5,3,,2.4,1.4,1.6,6,,,0.48,2.2,2.9,"2.3, 4.6, 6.9, 8.2, 5.9","    5.2,1.8, 9.4",5.58,
-Snapdragon,antirrhinum majus,A,Dicot,Experimental,1,1,,0.2,0.8,1.1,10,3,0.6,1.4,2.1,3.3,7.4,1.3,7.4,
-snapdragon,antirrhinum majus,B,Dicot,Experimental,,,,,,,10,3,,,,,,,,
-Honeyworts,Cerinthe major,A,Dicot,Experimental,,,,,,,4,,,,,,,,,
-Honeyworts,Cerinthe major,B,Dicot,Experimental,,,,,,,4,,,,,,,,,
-Kingfisher dasey,Felicia amelloides,A,Dicot,Experimental,,,,,,,5,,,,,,,,,
-Kingfisher dasey,Felicia amelloides,B,Dicot,Experimental,,,,,,,5,,,,,,,,,
-Petunia,Petunia integrifolia,A,Dicot,Experimental,6,3,,0.4,2,2,5,,,0.4,1.2,2,"1.2, 4.3, 5.6, 7.8, 0.4, 2.3","    3.7,7.1, 2.4",3.6,
-Petunia,Petunia integrifolia,B,Dicot,Experimental,4,1,0.5,1,1.2,2,5,,,0.22,1.4,2.2,"1.7, 4.2, 7.5, 1.9",4.7,3.82,
-Tomato,Solanum lycopersicum,A,Dicot,Experimental,2,,,,,,5,,,0.9,2.4,2.6,"5.8, 6.4",,6.1,
-Tomato,Solanum lycopersicum,B,Dicot,Experimental,3,2,,1.1,3,2.4,5,,,1.2,1.8,2.4,"2.6, 5.4, 8.3","4.8,8.3",5.4,
-common Sunflower,Helianthus annuus,A,Dicot,Experimental,1,1,1,1.5,2.5,2.9,3,,0.4,0.9,2.3,3.2,7.3,7.9,7.3,
-common Sunflower,Helianthus annuus,B,Dicot,Experimental,1,,,,,,3,,1.6,1.4,3.7,2.3,9,,9,
-bearded Iris,Iris × germanica,A,monocot,Experimental,,,,,,,5,,,,,,,,,
-bearded Iris,Iris × germanica,B,monocot,Experimental,,,,,,,5,,,,,,,,,
-Daffodil,Narcissus pseudonarcissus,A,monocot,Experimental,2,3,0.9,1.4,1.5,1.6,5,,,0.15,1,1.5,"4.7, 0.6","    6.2, 1.5,8.7",2.65,
-Daffodil,Narcissus pseudonarcissus,B,monocot,Experimental,1,1,0.5,1,2,2.5,5,,,0.7,1.1,3,5.3,5.7,5.3,
-Purple Loosestrife,Lythrum salicaria,A,dicot,Experimental,,,,,,,5,,,,,,,,,
-Purple Loosestrife,Lythrum salicaria,B,dicot,Experimental,1,,,,,,5,,0.4,1.3,4.9,2,8.6,,8.6,
+﻿Common Name,Scientific Name,Group,Indavidual lengrths (roots),Plant Type,Control/Experimental,number of roots over all,number of sprouts over all,Change in week 1 (sprout),change in week 2 (sprout),change in week 3 (sprout),change in week 4 (sprout),seed amount,seed amount variation ±,Change in week 1 (root),change in week 2 (root),change in week 3 (root),change in week 4 (root),Indavidual langth (sprouts)
+Sweet pea,Lathyrus odoratus,A,,Dicot,control,,,,,,,4,,,,,,
+Sweet pea,Lathyrus odoratus,B,"3.5, 7.2, 1.8, 5.9",Dicot,control,4,,,,,,4,,0.5,1,1.5,1.6,
+Garlic,Allium tuberosum,A,4.7,monocot,control,1,,,,,,5,,,1.5,2,1.2,
+Garlic,Allium tuberosum,B,"3.9, 6.1",monocot,control,2,1,,2,2.5,1.8,5,,,1.3,2.3,1.4,6.3
+Wheat,Triticum aestivum,A,"5.6, 5.8, 4.7, 7.3, 4.2, 2.1",monocot,control,6,2,1.2,1.8,1.5,1.85,4,,0.7,1.2,1.3,1.7,"6.2, 6.5"
+Wheat,Triticum aestivum,B,"2.3, 5.6, 1, 8.9, 4.2, 7.7, 0.5,9.2, 3.4, 6.1, 2.8, 5.3, 1.7, 8, 4.9, 7.4, 0.2",monocot,control,17,4,0.8,1.2,2.62,2.5,3,,0.4,1,1.1,2.1,"8, 5.7, 8.2, 6.6"
+Rye,Secale cereale,A,"    2.3,6.8, 4.5,1.9,8.1,3.7,9.4",monocot,control,7,2,,1,3.5,1.5,4,,0.8,1.4,2.2,1,"    4.2,7.8"
+Rye,Secale cereale,B,"    2.6,5.4,8.1,1.7,4.9,7.2,3.3,6.5,9.8",monocot,control,9,1,1.2,2.5,1.8,3.8,4,,1,1.3,2.1,1.1,9.3
+Maize,Zea mays,A,"    1.8,4.3, 7.9,3.6,6.1,9.2, 2.7,5.4",monocot,control,8,2,,1,2.85,3,3,,,1.2,1.9,2.12,"6.2,7.5"
+Maize,Zea mays,B,"    3.2,7.5,1.6,9.8,5.1,2.4,8.7",monocot,control,7,3,,1.8,1.7,2.4,3,,,1.4,1.5,1.5,"5.3,5.9,6.5"
+Cabbage,Brassica oleracea var. capitata,A,"2.5, 4.1, 7.2, 0.8",dicot,control,4,2,,0.65,2.8,1.5,6,,,0.45,1.2,2,"3.2, 6.7"
+Cabbage,Brassica oleracea var. capitata,B,"8.1, 6.5,  3.2",dicot,control,3,3,,0.93,1.8,2.7,6,,,1.4,2.1,2.3,"2.6, 5.4, 8.3"
+Onion,Allium cepa,A,"2.7, 5.4, 3.6, 7.1",monocot,control,4,4,1.2,0.8,1.27,2.5,5,,0.4,1.3,1.6,1.4,"1.8, 4.5,7.2, 9.6"
+Onion,Allium cepa,B,"3.2, 4.8, 6.3, 8.7, 2.5",monocot,control,5,4,,1.67,2,2.5,5,,0.5,1.1,2.3,1.2,"2.3, 5.1, 7.9, 9.4"
+Basil,Ocimum basilicum,A,"2.4, 5.7",Dicot,control,2,1,0.8,1.5,2.1,3,6,,,1.6,1.4,1.05,7.4
+Basil,Ocimum basilicum,B,"3.9, 6.2, 4.9",Dicot,control,3,3,,1.4,1,2.4,6,,,1.3,1.7,2,"1.7, 4.2, 8.5"
+Thale Cress,Arabidopsis thaliana,A,"5.8, 4.7",monocot,control,2,20,,0.5,0.41,0.2,30,5,,0.25,2.2,2.7,"1.63,1.14, 0.92, 0.27,1.88,0.46, 1.72,  0.81, 0.35,  0.59,1.95,1.28, 1.07, 1.41, 0.75, 1.99, 0.13, 1.55
+, 0.64,1.83"
+Thale Cress,Arabidopsis thaliana,B,"5.1, 4.6, 1.8, 5.5, 7.2, 6.7",monocot,control,6,25,,0.2,0.5,0.28,30,5,,0.55,2.1,2.5,"    1.47, 0.82, 0.25, 1.36, 0.54, 0.94, 1.82, 0.67, 0.11, 1.73, 0.37, 1.25, 0.76, 1.64, 1.05, 0.41, 0.29, 1.93, 1.11, 0.49, 1.17, 0.73, 0.18, 1.55, 1.88"
+Sage,salvia sommrrzisnsis,A,,Dicot,control,,,,,,,6,,,,,,
+Sage,salvia sommrrzisnsis,B,,Dicot,control,,,,,,,6,,,,,,
+Succulent,echeveria sedum,A,"1.3, 3.9",Dicot,control,2,,,,,,6,,,0.6,0.9,1.1,
+Succulent,echeveria sedum,B,"1.7, 4.3, 6.8, 3.2, 0.6",Dicot,control,5,2,0.55,2.4,3,1.1,6,,,0.32,1.2,1.8,"5.8, 7.3"
+Snapdragon,antirrhinum majus,A,,Dicot,control,,,,,,,10,3,,,,,
+snapdragon,antirrhinum majus,B,,Dicot,control,,,,,,,10,3,,,,,
+Honeyworts,Cerinthe major,A,,Dicot,control,,,,,,,4,,,,,,
+Honeyworts,Cerinthe major,B,,Dicot,control,,,,,,,4,,,,,,
+Kingfisher dasey,Felicia amelloides,A,,Dicot,control,,,,,,,5,,,,,,
+Kingfisher dasey,Felicia amelloides,B,,Dicot,control,,,,,,,5,,,,,,
+Petunia,Petunia integrifolia,A,"6.2, 5.6, 7.3, 1.4, 4.8, 6.4, 0.3",Dicot,control,7,3,,1.7,1.8,1.23,5,,,0.37,1.5,2.7,"    4.7, 1.2, 8.3"
+Petunia,Petunia integrifolia,B,"1.2, 3.5, 6.8, 2.3, 4.6, 5.7, 0.9, 5.1, 4",Dicot,control,9,3,0.13,1.7,1.3,2,5,,0.08,0.2,1.2,2.3,"    5.9, 2.4, 7.1"
+Tomato,Solanum lycopersicum,A,,Dicot,control,,,,,,,5,,,,,,
+Tomato,Solanum lycopersicum,B,"3.5, 4.2, 7.8, 9.3",Dicot,control,4,1,0.7,1.2,1.4,2.8,5,,,1.3,3,1.9,6.1
+Common Sunflower,Helianthus annuus,A,5.7,Dicot,control,1,,,,,,3,,,1,2.5,2.2,
+Common Sunflower,Helianthus annuus,B,"3.9, 5.1",Dicot,control,2,1,1.5,2,3.2,2.2,3,,,0.8,1.3,2.4,8.9
+Bearded Iris,Iris × germanica,A,,monocot,control,,,,,,,5,,,,,,
+Bearded Iris,Iris × germanica,B,,monocot,control,,,,,,,5,,,,,,
+Daffodil,Narcissus pseudonarcissus,A,"5.2, 5.9, 7.4, 1.8",monocot,control,4,3,,1.5,2.1,1.9,5,,,0.57,1.8,2.7,"    3.8, 6.5, 9.2"
+Daffodil,Narcissus pseudonarcissus,B,"1.7, 4.3, 6.7",monocot,control,3,2,,1.8,1.9,1.4,5,,,0.26,1.2,2.1,"    4.3, 7.9"
+purple Loosestrife,Lythrum salicaria,A,"6.4, 9.6",dicot,control,2,1,,1.3,1.8,3.7,5,,,1.5,4.1,2.4,6.8
+Purple Loosestrife,Lythrum salicaria,B,,dicot,control,,,,,,,5,,,,,,
+Sweet pea,Lathyrus odoratus,A,5.1,Dicot,Experimental,1,,,,,,4,,,0.6,2.1,2.4,
+Sweet pea,Lathyrus odoratus,B,"2.8, 4.4",Dicot,Experimental,2,1,,1.5,1.7,2,4,,,1.1,3.2,1.8,5.2
+Garlic,Allium tuberosum,A,6.7,monocot,Experimental,1,,,,,,5,,,1.2,3.2,2.3,
+Garlic,Allium tuberosum,B,7.4,monocot,Experimental,1,2,0.4,1.3,2.8,1.2,5,,,1.1,3.5,2.8,"4.8, 6.7"
+Wheat,Triticum aestivum,A,"5.1,2.6,4.4,2.3,1.7,5.8",monocot,Experimental,6,1,1.5,2,2.5,1.5,4,,0.5,1,1.1,1.1,8.5
+Wheat,Triticum aestivum,B,"6.2, 4.1, 5.3, 5",monocot,Experimental,4,2,1.1,3.6,1.3,2.7,3,,0.6,1,1.5,2,"8.2, 9.3"
+Rye,Secale cereale,A,"    4.7,7.2",monocot,Experimental,2,2,1.2,1.5,1.5,1.8,4,,0.8,1.5,1.65,2,"7.7, 5.4"
+Rye,Secale cereale,B,"    6.3,2.8,9.5",monocot,Experimental,3,2,,0.8,3.2,2.3,4,,1,1.5,2,1.7,"5.9, 6.8"
+Maize,Zea mays,A,"5.2,5.5",monocot,Experimental,2,2,,1.6,1.9,1.1,3,,0.5,1,2,1.85,"4.3,4.9"
+Maize,Zea mays,B,"5.8,6.2",monocot,Experimental,3,2,,0.7,1.5,1.9,3,,,1.5,1,3.5,"3.7,4.5"
+Cabbage,Brassica oleracea var. capitata,A,"4.2, 6.6",dicot,Experimental,2,1,0.5,0.7,0.8,1.2,6,,,1,1.8,2.6,3.2
+Cabbage,Brassica oleracea var. capitata,B,"3.5, 6.1, 5.3",dicot,Experimental,3,1,0.7,1,1.2,2.2,6,,,0.6,1.4,2.9,5.1
+Onion,Allium cepa,A,2.2,monocot,Experimental,1,,,,,,5,,,0.2,0.8,1.2,
+Onion,Allium cepa,B,"1.8, 4.6, 7.3, 0.9",monocot,Experimental,4,2,1,2.4,2.2,2.6,5,,0.05,0.4,1.4,1.6,"7.2, 9.3"
+Basil,Ocimum basilicum,A,"2.4, 7.1",Dicot,Experimental,2,1,0.3,0.5,1.2,0.8,6,,,0.15,1.3,2.2,2.8
+Basil,Ocimum basilicum,B,"5.7, 1.9",Dicot,Experimental,2,3,,0.5,0.3,0.7,6,,,0.6,1,2.2,"2.3, 1.6, 0.8"
+Thale Cress,Arabidopsis thaliana,A,"1.2, 3.5, 5.8, 1.7, 4.8, 7.9, 2.3",monocot,Experimental,7,27,,0.3,0.7,0.2,30,5,0.08,0.1,1.4,2.4,"    2,0.8,1.4,1.9,0.2,1.7,0.6, 2.1,1.1,0.5,2.3,0.9,1.6, 0.3,1.1, 2.2, 0.7,1.8, 0.4, 1.5, 0.9, 2.4, 1.3, 0.5, 2, 1.2, 0.7"
+Thale Cress,Arabidopsis thaliana,B,"1.5, 3.8, 6.2, 5.8, 3.2",monocot,Experimental,5,22,,,0.6,0.5,30,5,,0.4,1.1,2.6,"    0.8,1.4,0.3,2.1,1,0.6,2.2,0.4,1.1,0.9,1.7,0.2,1.9,0.5,2.3,1.2,0.1,1.8,0.7, 2,1.4,0.8"
+Sage,salvia sommrrzisnsis,A,,Dicot,Experimental,,,,,,,6,,,,,,
+Sage,salvia sommrrzisnsis,B,,Dicot,Experimental,,,,,,,6,,,,,,
+Succulent,echeveria sedum,A,"7.1, 5.8",Dicot,Experimental,2,,,,,,6,,,0.4,2.6,3.5,
+Succulent,echeveria sedum,B,"2.3, 4.6, 6.9, 8.2, 5.9",Dicot,Experimental,5,3,,2.4,1.4,1.6,6,,,0.48,2.2,2.9,"    5.2,1.8, 9.4"
+Snapdragon,antirrhinum majus,A,7.4,Dicot,Experimental,1,1,,0.2,0.8,1.1,10,3,0.6,1.4,2.1,3.3,1.3
+snapdragon,antirrhinum majus,B,,Dicot,Experimental,,,,,,,10,3,,,,,
+Honeyworts,Cerinthe major,A,,Dicot,Experimental,,,,,,,4,,,,,,
+Honeyworts,Cerinthe major,B,,Dicot,Experimental,,,,,,,4,,,,,,
+Kingfisher dasey,Felicia amelloides,A,,Dicot,Experimental,,,,,,,5,,,,,,
+Kingfisher dasey,Felicia amelloides,B,,Dicot,Experimental,,,,,,,5,,,,,,
+Petunia,Petunia integrifolia,A,"1.2, 4.3, 5.6, 7.8, 0.4, 2.3",Dicot,Experimental,6,3,,0.4,2,2,5,,,0.4,1.2,2,"    3.7,7.1, 2.4"
+Petunia,Petunia integrifolia,B,"1.7, 4.2, 7.5, 1.9",Dicot,Experimental,4,1,0.5,1,1.2,2,5,,,0.22,1.4,2.2,4.7
+Tomato,Solanum lycopersicum,A,"5.8, 6.4",Dicot,Experimental,2,,,,,,5,,,0.9,2.4,2.6,
+Tomato,Solanum lycopersicum,B,"2.6, 5.4, 8.3",Dicot,Experimental,3,2,,1.1,3,2.4,5,,,1.2,1.8,2.4,"4.8,8.3"
+common Sunflower,Helianthus annuus,A,7.3,Dicot,Experimental,1,1,1,1.5,2.5,2.9,3,,0.4,0.9,2.3,3.2,7.9
+common Sunflower,Helianthus annuus,B,9,Dicot,Experimental,1,,,,,,3,,1.6,1.4,3.7,2.3,
+bearded Iris,Iris × germanica,A,,monocot,Experimental,,,,,,,5,,,,,,
+bearded Iris,Iris × germanica,B,,monocot,Experimental,,,,,,,5,,,,,,
+Daffodil,Narcissus pseudonarcissus,A,"4.7, 0.6",monocot,Experimental,2,3,0.9,1.4,1.5,1.6,5,,,0.15,1,1.5,"    6.2, 1.5,8.7"
+Daffodil,Narcissus pseudonarcissus,B,5.3,monocot,Experimental,1,1,0.5,1,2,2.5,5,,,0.7,1.1,3,5.7
+Purple Loosestrife,Lythrum salicaria,A,,dicot,Experimental,,,,,,,5,,,,,,
+Purple Loosestrife,Lythrum salicaria,B,8.6,dicot,Experimental,1,,,,,,5,,0.4,1.3,4.9,2,

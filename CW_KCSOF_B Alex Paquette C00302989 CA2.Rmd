@@ -54,13 +54,15 @@ This approach allows us to not only explore the intricacies of data manipulation
 
 # Data Manipulation
 
-```{r}
-install.packages("dplyr")
+```{r include=FALSE}
+#install.packages("dplyr")
+#install.packages("tidyr")
 ```
 
-
-```{r}
+These are the libraries we'll be using
+```{r, results='hide'}
 library(dplyr)
+library(tidyr)
 ```
 
 Load the data from the .csv and save it in a variable
@@ -68,13 +70,134 @@ Load the data from the .csv and save it in a variable
 bioData <- read.csv("rawData.csv")
 ```
 
+## Data Cleanup
 
+Replace all NA values with 0
 ```{r}
-bioData
+bioData[is.na(bioData)] <- 0
+```
+
+Setting values to be all lower case for consistency (except for Group column)
+```{r}
+bioData$Plant.Type <- tolower(bioData$Plant.Type)
+bioData$Control.Experimental <- tolower(bioData$Control.Experimental)
+bioData$Common.Name <- tolower(bioData$Common.Name)
+bioData$Scientific.Name <- tolower(bioData$Scientific.Name)
+```
+
+Converting the Group, Plant Type, and Control/Experimental columns to a categorical data type (factor)
+```{r}
+bioData$Group <- factor(bioData$Group)
+bioData$Plant.Type <- factor(bioData$Plant.Type)
+bioData$Control.Experimental <- factor(bioData$Control.Experimental)
+```
+
+We will be renaming the columns to fix spelling mistake and apply a consistent format to our dataset.
+```{r}
+bioData <- bioData %>%
+  rename(Common_Name = Common.Name,
+         Scientific_Name = Scientific.Name,
+         Plant_Type = Plant.Type,
+         Controler_Experimental = Control.Experimental,
+         Root_Count = number.of.roots.over.all,
+         Sprout_Count = number.of.sprouts.over.all,
+         Sprout_Week_1_Change = Change.in.week.1..sprout.,
+         Sprout_Week_2_Change = change.in.week.2..sprout.,
+         Sprout_Week_3_Change = change.in.week.3..sprout.,
+         Sprout_Week_4_Change = change.in.week.4..sprout.,
+         Seed_Amount = seed.amount,
+         Seed_Amount_Variation = seed.amount.variation..,
+         Root_Week_1_Change = Change.in.week.1..root.,
+         Root_Week_2_Change = change.in.week.2..root.,
+         Root_Week_3_Change = change.in.week.3..root.,
+         Root_Week_4_Change = change.in.week.4..root.,
+         Root_Lengths = Indavidual.lengrths..roots.,
+         Sprout_Lengths = Indavidual.langth..sprouts.
+         )
+```
+
+We will generate IDs for each entry so we can identify them uniquely.
+```{r}
+bioData <- bioData %>% mutate(id = row_number())
+bioData <- bioData %>% select(id, everything())
 ```
 
 
-# Data Presentation
+We are extracting the multiple values from the columns so that they can be read as individual numbers
+
+```{r}
+rootLengthsData <- bioData %>% separate_rows(Root_Lengths, sep = ",") %>% select(id, Root_Length = Root_Lengths)
+```
+
+Next we want to convert our Root Length to numeric
+```{r}
+rootLengthsData <- rootLengthsData %>% mutate(Root_Length = as.numeric(Root_Length))
+```
+
+Now we want to convert 'NA' to 0
+```{r}
+rootLengthsData[is.na(rootLengthsData)] <- 0
+```
+
+We've now extracted all the individual Root Length for each plant. This will allow us to visualize this data more effectively if necessary. Regardless, this data needs to exist in this raw form for further investigation.
+
+Now we want to repeat this step, but for the sprout length column. Now that we know the process, we can complete this in a single step.
+```{r}
+sproutLengthsData <- bioData %>%
+  separate_rows(Sprout_Lengths, sep = ",") %>%
+  select(id, Sprout_Length = Sprout_Lengths) %>%
+  mutate(Sprout_Length = as.numeric(Sprout_Length))
+
+sproutLengthsData[is.na(sproutLengthsData)] <- 0
+```
+
+Finally, we can remove the old columns from the dataset
+```{r, results='hide'}
+bioData <- bioData %>% select(-Root_Lengths, -Sprout_Lengths)
+```
+
+
+## Derive New Data
+
+Next we need to extract insights from our data. We will be adding columns to our main dataset to calculate the following:
+- Average and median root/stem lengths
+- Average growth over time for root and sprout
+
+### Calculate average and median
+
+This method will be used to perform calculations on a given dataset and append the results to the main dataset. In this case, we'll be passing `bioData` as our main dataset, and then `rootLengthsData` or `sproutLengthsData` depending on the calculation we want to make.
+```{r}
+calculate_summary <- function(main_data, summary_data, id_col, summary_col, summary_name, summary_method){
+  summary_values <- summary_data %>%
+    group_by({{id_col}}) %>%
+    summarize({{summary_name}} := summary_method({{summary_col}}))
+  result <- left_join(main_data, summary_values)
+  return(result)
+}
+```
+
+```{r, results='hide'}
+bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length, avg_root_length, mean) # average root length
+bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length, avg_sprout_length, mean) # average sprout length
+bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length, median_root_length, median) # Median sprout length
+bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length, median_sprout_length, median) # Median sprout length
+```
+### Calculate average growth over time
+```{r}
+bioData <- cbind(bioData, 
+                 avg_root_growth_per_Week = 
+                   rowSums(bioData %>% 
+                             select(Root_Week_1_Change, Root_Week_2_Change, Root_Week_3_Change, Root_Week_4_Change)))
+```
+
+```{r}
+bioData <- cbind(bioData, 
+                 avg_sprout_growth_per_Week = 
+                   rowSums(bioData %>% 
+                             select(Sprout_Week_1_Change, Sprout_Week_2_Change, Sprout_Week_3_Change, Sprout_Week_4_Change)))
+```
+
+# Data Visalization
 
 # Conclusion
 
