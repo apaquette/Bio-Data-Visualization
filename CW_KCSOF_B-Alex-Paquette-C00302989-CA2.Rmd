@@ -5,10 +5,10 @@ contributor: "Olivia Josephine Bain"
 professor: "Agnes Maciocha"
 date: "`r Sys.Date()`"
 output:
+  github_document: default
   word_document:
     toc: true
     fig_caption: yes
-  github_document: default
 ---
 
 ```{r setup, include=FALSE}
