@@ -13,6 +13,8 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=8)
+knitr::opts_chunk$set(warning=FALSE)
 ```
 
 \newpage
@@ -61,11 +63,6 @@ This approach allows us to not only explore the intricacies of data manipulation
 
 #install.packages("ggplot2")
 
-#install.packages("highcharter")
-#install.packages("webshot")
-#webshot::install_phantomjs()
-#install.packages("htmlwidgets")
-
 ```
 
 These are the libraries we'll be using
@@ -75,13 +72,8 @@ These are the libraries we'll be using
 library(dplyr)
 library(tidyr)
 
-
 # for visualization
 library(ggplot2)
-#not needed?
-library(highcharter)
-library(htmlwidgets)
-library(webshot)
 ```
 
 Load the data from the .csv and save it in a variable
@@ -277,7 +269,7 @@ create_bar_plot <- function(data, x_val, y_val, fill_val, titleName, subtitleNam
         plot.background = element_rect(fill = "white"),      # Set plot background color
         panel.background = element_rect(fill = "white"))  # Rotate x-axis labels for better readability
   fileName <- paste("charts/",titleName,".png")
-  ggsave(fileName, chart)
+  suppressMessages(ggsave(fileName, chart))
   return(chart)
 }
 
@@ -289,7 +281,14 @@ What do we need to show? - growth differences for roots and sprouts between cont
 ## Root Growth Average comparison
 
 ```{r}
-create_bar_plot(bioData, "Scientific_Name", "avg_root_growth_per_week_cm", "Controler_Experimental", "Average Root Growth", "per week over 4 weeks", "Plant Species", "Weekly Overall Growth Avg (cm)")
+create_bar_plot(data = bioData,
+                x_val = "Scientific_Name",
+                y_val = "avg_root_growth_per_week_cm",
+                fill_val = "Controler_Experimental",
+                titleName = "Average Root Growth",
+                subtitleName = "per week over 4 weeks",
+                x_title = "Plant Species",
+                y_title = "Weekly Overall Growth Avg (cm)")
 
 ```
 
@@ -297,13 +296,13 @@ This chart illustrates the average root growth for monocot plants comparing cont
 
 ```{r}
 create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
-                         x_val = "Scientific_Name",
-                         y_val = "avg_root_growth_per_week_cm",
-                         fill_val = "Controler_Experimental",
-                         titleName = "Average Root Growth for monocot plants",
-                         subtitleName = "per week over 4 weeks",
-                         x_title = "Monocot Plant Species",
-                         y_title = "Weekly Overall Growth Avg (cm)")
+                x_val = "Scientific_Name",
+                y_val = "avg_root_growth_per_week_cm",
+                fill_val = "Controler_Experimental",
+                titleName = "Average Root Growth for monocot plants",
+                subtitleName = "per week over 4 weeks",
+                x_title = "Monocot Plant Species",
+                y_title = "Weekly Overall Growth Avg (cm)")
 ```
 
 This chart illustrates the average root growth for dicot plants comparing control and experimental.
@@ -327,13 +326,13 @@ unique_plant_names <- unique(bioData$Scientific_Name)
 for(plant_name in unique_plant_names){
   # Generate a chart for the current plant
   create_bar_plot(data = filter(bioData, Scientific_Name == plant_name),
-                                x_val = "Scientific_Name",
-                                y_val = "avg_root_growth_per_week_cm",
-                                fill_val = "Controler_Experimental",
-                                titleName = paste("Average Root Growth for",plant_name),
-                                subtitleName = "per week over 4 weeks",
-                                x_title = "Plant Species",
-                                y_title = "Weekly Overall Growth Avg (cm)")
+                  x_val = "Scientific_Name",
+                  y_val = "avg_root_growth_per_week_cm",
+                  fill_val = "Controler_Experimental",
+                  titleName = paste("Average Root Growth for",plant_name),
+                  subtitleName = "per week over 4 weeks",
+                  x_title = "Plant Species",
+                  y_title = "Weekly Overall Growth Avg (cm)")
 }
 
 ```
@@ -342,26 +341,26 @@ This generates a chart for the average root growth for all dicot plants comparin
 
 ```{r}
 create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
-                         x_val = "Scientific_Name",
-                         y_val = "avg_root_growth_per_week_cm",
-                         fill_val = "Controler_Experimental",
-                         titleName = "Average Root Growth for dicot plants",
-                         subtitleName = "per week over 4 weeks",
-                         x_title = "Dicot Plant Species",
-                         y_title = "Weekly Overall Growth Avg (cm)")
+                x_val = "Scientific_Name",
+                y_val = "avg_root_growth_per_week_cm",
+                fill_val = "Controler_Experimental",
+                titleName = "Average Root Growth for dicot plants",
+                subtitleName = "per week over 4 weeks",
+                x_title = "Dicot Plant Species",
+                y_title = "Weekly Overall Growth Avg (cm)")
 ```
 
 ## Sprout Growth Average comparison
 
 ```{r}
 create_bar_plot(data = bioData,
-                         x_val = "Scientific_Name",
-                         y_val = "avg_sprout_growth_per_week_cm",
-                         fill_val = "Controler_Experimental",
-                         titleName = "Average Sprout Growth",
-                         subtitleName = "per week over 4 weeks",
-                         x_title = "Plant Species",
-                         y_title = "Weekly Overall Growth Avg (cm)")
+                x_val = "Scientific_Name",
+                y_val = "avg_sprout_growth_per_week_cm",
+                fill_val = "Controler_Experimental",
+                titleName = "Average Sprout Growth",
+                subtitleName = "per week over 4 weeks",
+                x_title = "Plant Species",
+                y_title = "Weekly Overall Growth Avg (cm)")
 ```
 
 This generates a chart for each individual plant that compares the control and experimental sample for sprout growth.
@@ -371,36 +370,36 @@ This generates a chart for each individual plant that compares the control and e
 for(plant_name in unique_plant_names){
   # Generate a chart for the current plant
   create_bar_plot(data = filter(bioData, Scientific_Name == plant_name),
-                                x_val = "Scientific_Name",
-                                y_val = "avg_sprout_growth_per_week_cm",
-                                fill_val = "Controler_Experimental",
-                                titleName = paste("Average Sprout Growth for",plant_name),
-                                subtitleName = "per week over 4 weeks",
-                                x_title = "Plant Species",
-                                y_title = "Weekly Overall Growth Avg (cm)")
+                  x_val = "Scientific_Name",
+                  y_val = "avg_sprout_growth_per_week_cm",
+                  fill_val = "Controler_Experimental",
+                  titleName = paste("Average Sprout Growth for",plant_name),
+                  subtitleName = "per week over 4 weeks",
+                  x_title = "Plant Species",
+                  y_title = "Weekly Overall Growth Avg (cm)")
 }
 ```
 
 ```{r}
 create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
-                                x_val = "Scientific_Name",
-                                y_val = "avg_sprout_growth_per_week_cm",
-                                fill_val = "Controler_Experimental",
-                                titleName = "Average Sprout Growth for monocot plants",
-                                subtitleName = "per week over 4 weeks",
-                                x_title = "Monocot Plant Species",
-                                y_title = "Weekly Overall Growth Avg (cm)")
+                x_val = "Scientific_Name",
+                y_val = "avg_sprout_growth_per_week_cm",
+                fill_val = "Controler_Experimental",
+                titleName = "Average Sprout Growth for monocot plants",
+                subtitleName = "per week over 4 weeks",
+                x_title = "Monocot Plant Species",
+                y_title = "Weekly Overall Growth Avg (cm)")
 ```
 
-```{r, echo=FALSE, fig.width=10}
+```{r}
 create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
-                                x_val = "Scientific_Name",
-                                y_val = "avg_sprout_growth_per_week_cm",
-                                fill_val = "Controler_Experimental",
-                                titleName = "Average Sprout Growth for dicot plants",
-                                subtitleName = "per week over 4 weeks",
-                                x_title = "Dicot Plant Species",
-                                y_title = "Weekly Overall Growth Avg (cm)")
+                x_val = "Scientific_Name",
+                y_val = "avg_sprout_growth_per_week_cm",
+                fill_val = "Controler_Experimental",
+                titleName = "Average Sprout Growth for dicot plants",
+                subtitleName = "per week over 4 weeks",
+                x_title = "Dicot Plant Species",
+                y_title = "Weekly Overall Growth Avg (cm)")
 ```
 
 -   growth over time chart
