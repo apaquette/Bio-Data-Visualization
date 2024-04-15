@@ -2,7 +2,7 @@ Enhancing Scientific Inquiry with R for Data Manipulation and
 Visualization
 ================
 Alexandre Paquette
-2024-04-14
+2024-04-15
 
 # Introduction
 
@@ -305,35 +305,26 @@ append the results to the main dataset. In this case, we’ll be passing
 calculate_summary <- function(main_data, summary_data, id_col, summary_col, summary_name, summary_method){
   summary_values <- summary_data %>%
     group_by({{id_col}}) %>%
-    summarize({{summary_name}} := summary_method({{summary_col}}))
-  result <- left_join(main_data, summary_values)
+    summarize(
+      {{summary_name}} := summary_method({{summary_col}})
+    )
+  
+  result <- left_join(main_data, summary_values, by = join_by({{id_col}}))
   return(result)
 }
 ```
 
 ``` r
 bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length_cm, avg_root_length_cm, mean) # average root length
-```
-
-    ## Joining with `by = join_by(id)`
-
-``` r
 bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length_cm, avg_sprout_length_cm, mean) # average sprout length
-```
-
-    ## Joining with `by = join_by(id)`
-
-``` r
 bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length_cm, median_root_length_cm, median) # Median sprout length
-```
-
-    ## Joining with `by = join_by(id)`
-
-``` r
 bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length_cm, median_sprout_length_cm, median) # Median sprout length
-```
+bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length_cm, root_length_sd, sd) # root length standard deviation
+bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length_cm, sprout_length_sd, sd) # sprout length standard deviation
 
-    ## Joining with `by = join_by(id)`
+# set all na values to 0
+bioData[is.na(bioData)] <- 0
+```
 
 ### Calculate average growth over time
 
@@ -354,21 +345,31 @@ bioData <- cbind(bioData,
 # Data Visualization
 
 ``` r
-create_bar_plot <- function(data, x_val, y_val, fill_val, titleName, subtitleName, x_title, y_title){
+create_bar_plot <- function(data, x_val, y_val, fill_val, sd = NULL, titleName, subtitleName = NULL, x_title, y_title, legend = TRUE, ...){
   colors <- c("experimental" = "#7cb5ec", "control" = "#f7a35c")
-  chart <- ggplot(data, aes_string(x = x_val, y = y_val, fill = fill_val)) +
-  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.6) +
-  scale_fill_manual(values = colors, name = "") +
-  labs(title = titleName,
-       subtitle = subtitleName,
-       x = x_title,
-       y = y_title) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(size = 20),
-        plot.subtitle = element_text(size = 16),             # Increase subtitle font size
-        plot.margin = margin(30, 30, 30, 30, "pt"),
-        plot.background = element_rect(fill = "white"),      # Set plot background color
-        panel.background = element_rect(fill = "white"))  # Rotate x-axis labels for better readability
+  
+  chart <- ggplot(data, aes(x = {{x_val}}, y = {{y_val}}, fill = {{fill_val}})) +
+          geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.6) +
+            scale_fill_manual(values = colors, name = "") +
+            labs(title = titleName, subtitle = subtitleName, x = x_title, y = y_title) +
+            theme(axis.text.x = element_text(angle = 45, hjust = 1),
+                  plot.title = element_text(size = 20),
+                  plot.margin = margin(30, 30, 30, 30, "pt"),
+                  plot.background = element_rect(fill = "white"),      # Set plot background color
+                  panel.background = element_rect(fill = "white"))  # Rotate x-axis labels for better readability
+  
+  if(!missing(sd)){
+    chart <- chart + geom_errorbar(aes(ymin = pmax({{y_val}} - {{sd}}, 0), ymax = {{y_val}} + {{sd}}), width = 0.4, position = position_dodge(width = 0.8))
+  }
+  
+  if(!missing(subtitleName)){
+    chart <- chart + theme(plot.subtitle = element_text(size = 16))
+  }
+  
+  if(legend == FALSE){
+    chart <- chart + guides(fill = FALSE)
+  }
+  
   fileName <- paste("charts/",titleName,".png")
   suppressMessages(ggsave(fileName, chart))
   return(chart)
@@ -382,9 +383,10 @@ between control/experimental
 
 ``` r
 create_bar_plot(data = bioData,
-                x_val = "Scientific_Name",
-                y_val = "avg_root_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_root_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = root_length_sd,
                 titleName = "Average Root Growth",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Plant Species",
@@ -398,9 +400,10 @@ comparing control and experimental.
 
 ``` r
 create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
-                x_val = "Scientific_Name",
-                y_val = "avg_root_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_root_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = root_length_sd,
                 titleName = "Average Root Growth for monocot plants",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Monocot Plant Species",
@@ -414,9 +417,10 @@ comparing control and experimental.
 
 ``` r
 create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
-                x_val = "Scientific_Name",
-                y_val = "avg_root_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_root_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = root_length_sd,
                 titleName = "Average Root Growth for dicot plants",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Dicot Plant Species",
@@ -434,9 +438,10 @@ unique_plant_names <- unique(bioData$Scientific_Name)
 for(plant_name in unique_plant_names){
   # Generate a chart for the current plant
   create_bar_plot(data = filter(bioData, Scientific_Name == plant_name),
-                  x_val = "Scientific_Name",
-                  y_val = "avg_root_growth_per_week_cm",
-                  fill_val = "Controler_Experimental",
+                  x_val = Scientific_Name,
+                  y_val = avg_root_growth_per_week_cm,
+                  fill_val = Controler_Experimental,
+                  sd = root_length_sd,
                   titleName = paste("Average Root Growth for",plant_name),
                   subtitleName = "per week over 4 weeks",
                   x_title = "Plant Species",
@@ -449,9 +454,10 @@ comparing the control and experimental samples
 
 ``` r
 create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
-                x_val = "Scientific_Name",
-                y_val = "avg_root_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_root_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = root_length_sd,
                 titleName = "Average Root Growth for dicot plants",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Dicot Plant Species",
@@ -464,9 +470,10 @@ create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
 
 ``` r
 create_bar_plot(data = bioData,
-                x_val = "Scientific_Name",
-                y_val = "avg_sprout_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_sprout_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = sprout_length_sd,
                 titleName = "Average Sprout Growth",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Plant Species",
@@ -483,9 +490,10 @@ control and experimental sample for sprout growth.
 for(plant_name in unique_plant_names){
   # Generate a chart for the current plant
   create_bar_plot(data = filter(bioData, Scientific_Name == plant_name),
-                  x_val = "Scientific_Name",
-                  y_val = "avg_sprout_growth_per_week_cm",
-                  fill_val = "Controler_Experimental",
+                  x_val = Scientific_Name,
+                  y_val = avg_sprout_growth_per_week_cm,
+                  fill_val = Controler_Experimental,
+                  sd = sprout_length_sd,
                   titleName = paste("Average Sprout Growth for",plant_name),
                   subtitleName = "per week over 4 weeks",
                   x_title = "Plant Species",
@@ -495,9 +503,10 @@ for(plant_name in unique_plant_names){
 
 ``` r
 create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
-                x_val = "Scientific_Name",
-                y_val = "avg_sprout_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_sprout_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = sprout_length_sd,
                 titleName = "Average Sprout Growth for monocot plants",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Monocot Plant Species",
@@ -508,9 +517,10 @@ create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
 
 ``` r
 create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
-                x_val = "Scientific_Name",
-                y_val = "avg_sprout_growth_per_week_cm",
-                fill_val = "Controler_Experimental",
+                x_val = Scientific_Name,
+                y_val = avg_sprout_growth_per_week_cm,
+                fill_val = Controler_Experimental,
+                sd = sprout_length_sd,
                 titleName = "Average Sprout Growth for dicot plants",
                 subtitleName = "per week over 4 weeks",
                 x_title = "Dicot Plant Species",
@@ -518,6 +528,38 @@ create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
 ```
 
 ![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+
+- control best count
+- experimental best count
+
+``` r
+better_growth <- bioData %>%
+  group_by(Scientific_Name) %>% 
+  summarise(
+    better_growth_control = sum(avg_root_growth_per_week_cm[Controler_Experimental == "control"] > avg_root_growth_per_week_cm[Controler_Experimental == "experimental"]),
+    better_growth_experimental = sum(avg_root_growth_per_week_cm[Controler_Experimental == "experimental"] > avg_root_growth_per_week_cm[Controler_Experimental == "control"])
+  ) %>%
+  summarise(
+    better_growth_control = sum(better_growth_control),
+    better_growth_experimental = sum(better_growth_experimental)
+  ) %>%
+  pivot_longer(cols = starts_with("better_growth"), names_to = "Category", values_to = "total_count") %>%
+  mutate(Category = gsub("better_growth_", "",Category)) %>%
+  mutate (sd = 0)
+
+chart <- create_bar_plot(data = better_growth,
+                x_val = Category,
+                y_val = total_count,
+                fill_val = Category,
+                titleName = "Better Root Growth per Condition",
+                subtitleName = "",
+                x_title = "Condition",
+                y_title = "Number of plants",
+                legend = FALSE)
+chart
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
 
 - growth over time chart
 
