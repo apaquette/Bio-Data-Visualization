@@ -2,7 +2,27 @@ Enhancing Scientific Inquiry with R for Data Manipulation and
 Visualization
 ================
 Alexandre Paquette
-2024-04-16
+17th April, 2024
+
+- [Introduction](#introduction)
+  - [Understanding Scientific
+    Research](#understanding-scientific-research)
+  - [A Real-world Case Study](#a-real-world-case-study)
+- [Research Question](#research-question)
+  - [Rationale Behind the Study](#rationale-behind-the-study)
+  - [Methodology](#methodology)
+- [Data Manipulation](#data-manipulation)
+  - [Data Cleanup](#data-cleanup)
+  - [Derive New Data](#derive-new-data)
+    - [Calculate average and median, and standard
+      deviation](#calculate-average-and-median-and-standard-deviation)
+- [Data Visualization with R](#data-visualization-with-r)
+  - [Old Visualizations (using excel)](#old-visualizations-using-excel)
+  - [Using Functions in R](#using-functions-in-r)
+  - [Bar charts with R](#bar-charts-with-r)
+  - [Scatter plots with R](#scatter-plots-with-r)
+- [Conclusion](#conclusion)
+- [Glossary of Terms](#glossary-of-terms)
 
 # Introduction
 
@@ -46,7 +66,7 @@ whether the application of this bio-priming agent contributes to the
 overall health and vigor of plants upon completion of the germination
 process.
 
-The study aims to demonstrate the efficacy of the biopriming agent in
+The study aims to demonstrate the efficacy of the bio-priming agent in
 enhancing plant growth, resilience, and productivity by leveraging the
 natural symbiotic relationship between *Bacillus cereus* and
 *Pseudomonas alcaligenes*. Through a series of controlled experiments
@@ -83,16 +103,16 @@ Our study aims to shed light on the process of taking real-world data
 from a scientific study, manipulating it to extract meaningful insights,
 and visualizing these insights for enhanced comprehension. Specifically,
 our interest lies in exploring the relationship between the application
-of a PGPB (Plant Growth Promoting Bacteria) consortium as a biopriming
+of a PGPB (Plant Growth Promoting Bacteria) consortium as a bio-priming
 agent on the seeds of various plant species and the resulting health and
 vigor of plants during the germination growth stage of the plant life.
 
 Data visualization serves as a powerful tool in this endeavor, enabling
 us to visually compare growth parameters and trends between experimental
-bioprimed seeds and control non-exposed seeds. Through visual
+bio-primed seeds and control non-exposed seeds. Through visual
 representations, we seek to uncover patterns, trends, and correlations
 within the growth data, providing valuable insights into the efficacy of
-biopriming with PGPB as a plant growth promoter.
+bio-priming with PGPB as a plant growth promoter.
 
 ## Methodology
 
@@ -123,7 +143,7 @@ leveraging the capabilities of R programming and relevant libraries such
 as dplyr, tidyr, and readr, in order to prepare our data for
 visualization. We will load our raw data from a CSV file into a
 variable, denoted as ‘bioData’, which will be our foundation for
-subsequent analysis and visualizations. This step facilitates athe
+subsequent analysis and visualizations. This step facilitates the
 organization and structuring of our dataset, and enables the exploration
 of key insights and trends within the data.
 
@@ -237,9 +257,6 @@ bioData <- bioData %>%
   ungroup()
 ```
 
-    ## `summarise()` has grouped output by 'Scientific_Name'. You can override using
-    ## the `.groups` argument.
-
 We generate unique identifiers for each entry in the dataset,
 facilitating tracking of individual data points.
 
@@ -320,7 +337,7 @@ bioData <- bioData %>% select(-Root_Week_1_Change_cm, -Root_Week_2_Change_cm, -R
 
 In this stage, we will go through the process of extracting new
 information from our dataset by deriving metrics and indicators. To
-enhance our understanding of the effect of biopriming on plant growth,
+enhance our understanding of the effect of bio-priming on plant growth,
 we can augment our original dataset with additional columns to calculate
 key measures such as average and median root and stem lengths.
 Furthermore, we compute the average growth over time for both root and
@@ -379,10 +396,32 @@ Excel and identify limitations that can be overcome by using R and
 
 ## Old Visualizations (using excel)
 
+Excel has long been a popular choice for its accessibility and
+user-friendly interface. However, it falls short when confronted with
+the complexity and nuances inherent to scientific data. To illustrate
+this, we present a visualization produced using Excel below:
+
+![](Excel_vis/image003.png)
+
+The data displayed in this visualization is difficult to decipher, and
+little information is gleamed from the data. The improvements `ggplot2`
+in R to our visualizations will become apparent in our later sections.
+
 ## Using Functions in R
 
-This is a re-usable function that generates a bar chart based on
-parameters supplied.
+Encapsulating common visualization tasks into reusable functions enables
+researchers to efficiently generate a wide range of visualizations
+tailed to their specific needs. The power and versatility of utilizing
+custom functions in R enable us to streamline the process of
+visualization.
+
+We introduce three distinct functions designed to facilitate the
+production of visualizations: `create_bar_plot`, `create_scatter_plot`,
+and `get_r_squared`. These functions serve as useful tools for
+automating the generation of bar charts, scatter plots, and calculating
+the R-square value of a line of best fit. These functions enable
+researchers to expedite their data analysis pipeline, enhance
+reproducibility, and gain deeper insights into their datasets.
 
 ``` r
 create_bar_plot <- function(data, x_val, y_val, fill_val, sd = NULL, titleName, subtitleName = "", x_title, y_title, legend = TRUE, hideXAxisText = FALSE,...){
@@ -418,12 +457,7 @@ create_bar_plot <- function(data, x_val, y_val, fill_val, sd = NULL, titleName, 
   suppressMessages(ggsave(fileName, chart))
   return(chart)
 }
-```
 
-This is a re-usable function that generates a scatter plot chart based
-on parameters supplied.
-
-``` r
 create_scatter_plot <- function(data, x_val, y_val, fill_val, line_of_best_fit = FALSE, growth_curve = FALSE, titleName, subtitleName = "", x_title, y_title, legend = TRUE, hideXAxisText = FALSE,...){
   colors <- c("experimental" = "#7cb5ec", "control" = "#f7a35c")
   
@@ -464,13 +498,7 @@ create_scatter_plot <- function(data, x_val, y_val, fill_val, line_of_best_fit =
 
   return(chart)
 }
-```
 
-This is a re-usable function that calculates the r-squared value of a
-line of a best fit given a dataset, assuming the line was computer using
-linear regression.
-
-``` r
 get_r_squared <- function(data, grouping, value, category){
   r_squared <- data %>% 
     group_by(!!sym(grouping)) %>% 
@@ -481,32 +509,28 @@ get_r_squared <- function(data, grouping, value, category){
 
 ## Bar charts with R
 
-For the length average comparison, we have two values we can visualize:
-root lengths, and sprout lengths. Below we will create a dataset derived
-from our main bioData datset to visualize our root and sprout length
-data.
+Using bar charts with our dataset enables us to gain a comprehensive
+understanding of the relationship between bio-priming treatment and
+plant growth statistics.
+
+We begin by extracting data specifically for root and sprout lengths
+from our main dataset, `bioData`, creating separate datasets named
+`bioDataRoot` and `bioDataSprout`.
 
 ``` r
 bioDataRoot <- bioData %>%
               group_by(Scientific_Name) %>%
               filter(n() == 2) %>%
               filter(all(avg_root_length_cm != 0))
-```
 
-``` r
 bioDataSprout <- bioData %>%
               group_by(Scientific_Name) %>%
               filter(n() == 2) %>%
               filter(all(avg_sprout_length_cm != 0))
 ```
 
-Using our create_bar_plot function from earlier, we are creating a
-visualization to illustrate the average root length by comparing each
-control sample to the experimental sample. We are also displaying the
-standard deviation of each sample if available.
-
-The following code creates the visualization for the average root
-lengths.
+Using our create_bar_plot function from earlier, we compare the average
+root and sprout lengths between control and experimental samples.
 
 ``` r
 create_bar_plot(data = bioDataRoot,
@@ -519,10 +543,10 @@ create_bar_plot(data = bioDataRoot,
                 y_title = "Avg Length (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
-The following code creates the visualization for the average sprout
-lengths.
+We also visualize these comparisons separately for monocot and dicot
+plants.
 
 ``` r
 create_bar_plot(data = bioDataSprout,
@@ -535,15 +559,7 @@ create_bar_plot(data = bioDataSprout,
                 y_title = "Avg Length (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
-
-Next, we want to create visualizations for just monocot and dicot
-plants. Effectively, we want to filter our selection to just monocot or
-dicot depending on the visualization. We can do this for both root and
-sprout lengths.
-
-The following code creates a visualization for the average root lengths
-for just plants
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 ``` r
 create_bar_plot(data = subset(bioDataRoot, Plant_Type == "monocot"),
@@ -557,10 +573,7 @@ create_bar_plot(data = subset(bioDataRoot, Plant_Type == "monocot"),
                 y_title = "Avg Length (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
-
-The following code creates a visualization for the average root lengths
-for dicot plants.
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 ``` r
 create_bar_plot(data = subset(bioDataRoot, Plant_Type == "dicot"),
@@ -574,10 +587,7 @@ create_bar_plot(data = subset(bioDataRoot, Plant_Type == "dicot"),
                 y_title = "Avg Length (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
-
-The following code creates a visualization for the average sprout
-lengths for monocot plants.
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 ``` r
 create_bar_plot(data = subset(bioDataSprout, Plant_Type == "monocot"),
@@ -591,10 +601,7 @@ create_bar_plot(data = subset(bioDataSprout, Plant_Type == "monocot"),
                 y_title = "Avg Length (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
-
-The following code creates a visualization for the average sprout
-lengths for dicot plants.
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 ``` r
 create_bar_plot(data = subset(bioDataSprout, Plant_Type == "dicot"),
@@ -608,19 +615,11 @@ create_bar_plot(data = subset(bioDataSprout, Plant_Type == "dicot"),
                 y_title = "Avg Length (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
-The following section illustrates how we can leverage R as a programming
-language and produce multiple visualizations all at once. In this case,
-we have a total of 15 plants we need to generate visualizations for.
-Each plant needs a visualization for root and sprout lengths, resulting
-in nearly 30 visualizations for this aspect of the data alone. By
-writing a script that iterates through each plant, we can quickly
-produce these visualizations using our create_bar_plot function.
-
-The following code generates visualizations for each plant in the
-dataset by iterating through a list of plants, and passing a filtered
-dataset containing the data for just that plant.
+We can further demonstrate the efficiency of R by automating the
+visualization process for each plant in our dataset, producing nearly 30
+visualizations with minimal code.
 
 ``` r
 unique_plant_names <- unique(bioDataRoot$Scientific_Name)
@@ -640,9 +639,6 @@ for(plant_name in unique_plant_names){
 }
 ```
 
-The following code generates visualizations does the same as the
-previous code chunk, but for average sprout lengths.
-
 ``` r
 unique_plant_names <- unique(bioDataSprout$Scientific_Name)
 # Iterate through each unique plant name
@@ -661,14 +657,9 @@ for(plant_name in unique_plant_names){
 }
 ```
 
-Finally, we can display the plant distribution between our control and
-experimental to show how many resulted in higher averages between the
-control and experimental.
-
-The following code compares the average root length between control or
-experimental, and adds them to the sum of either control or
-experimental. It then passes the resulting dataset to our method to
-display the information visually.
+Finally, we illustrate the distribution of plants with higher average
+root and sprout lengths between control and experimental conditions,
+providing insights into the effectiveness of the experimental treatment.
 
 ``` r
 higher_length <- bioDataRoot %>%
@@ -695,10 +686,7 @@ create_bar_plot(data = higher_length,
                 hideXAxisText = TRUE)
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
-
-The following code does the same thing as the previous chunk, but for
-sprout length.
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
 
 ``` r
 higher_length <- bioDataSprout %>%
@@ -726,28 +714,31 @@ create_bar_plot(data = higher_length,
                 hideXAxisText = TRUE)
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
 
 ## Scatter plots with R
 
-Here we know we have one of our plants in our dataset that doesn’t have
-any corresponding control, so we need to remove it from the dataset.
+Using scatter plots for visualizations gives us insight into how the
+bio-priming treatment affects the growth patterns of different plant
+species. It allows us to visualize the growth of roots and sprouts over
+a period of 4 weeks.
+
+First, we ensure the integrity of our data by remove any entries that
+lack corresponding control data. In this case, we know that the plant
+*antirrhinum majus* lacks such data, so it will be removed from our
+dataset.
 
 ``` r
 weeklyRootGrowths <- weeklyRootGrowths %>% filter(Scientific_Name != "antirrhinum majus")
 weeklySproutGrowths <- weeklySproutGrowths %>% filter(Scientific_Name != "antirrhinum majus")
 ```
 
-Using our create_scatter_plot function from earlier, we are creating a
-visualization to illustrate the average root growth by comparing each
-control sample to the experimental sample. We are also using our
-get_r_squared method to return the r_squared value of the line of best
-fit using linear regression.
-
-The following code creates the visualization for the average root growth
-over 4 weeks, and calculates the r_squared value for the control and
-experimental. Two visualizations are produced: one with a line of best
-fit, and one with a growth curve.
+Next, we employ the `create_scatter_plot` function to generate the
+visualization to compare the average growth of roots and sprouts between
+control and experimental over four weeks. Additionally, we computer the
+R-squared value to assess how good our line of best fit matches the
+data. Two versions of each visualization are produced: one with a line
+of best fit, and one with a growth curve.
 
 ``` r
 create_scatter_plot(data = weeklyRootGrowths, 
@@ -760,7 +751,7 @@ create_scatter_plot(data = weeklyRootGrowths,
                     y_title = "Measurments (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
 
 ``` r
 create_scatter_plot(data = weeklyRootGrowths, 
@@ -773,16 +764,13 @@ create_scatter_plot(data = weeklyRootGrowths,
                     y_title = "Measurments (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-33-2.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-30-2.png)<!-- -->
 
 ``` r
 rsquared_data <- get_r_squared(data = weeklyRootGrowths, grouping = "Control_Experimental", value = "measurement_cm", category = "week") %>% 
                   mutate(Plant = "All Plants", Plant_Section = "root")
 ```
 
-The following code does the same as the previous chunk, but for sprout
-growth.
-
 ``` r
 create_scatter_plot(data = weeklySproutGrowths, 
                     x_val = week, 
@@ -794,7 +782,7 @@ create_scatter_plot(data = weeklySproutGrowths,
                     y_title = "Measurments (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
 ``` r
 create_scatter_plot(data = weeklySproutGrowths, 
@@ -807,7 +795,7 @@ create_scatter_plot(data = weeklySproutGrowths,
                     y_title = "Measurments (cm)")
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-34-2.png)<!-- -->
+![](Enhancing-Scientific-Inquiry-with-R-for-Data-Manipulation-and-Visualization_files/figure-gfm/unnamed-chunk-31-2.png)<!-- -->
 
 ``` r
 rsquared_data <- bind_rows(rsquared_data, 
@@ -816,12 +804,10 @@ rsquared_data <- bind_rows(rsquared_data,
                            )
 ```
 
-As with our column visualizations, we can leverage R programming to
-produce multiple visualizations using our pre-defined method.
-
-The following code generates visualizations for each plant in the
-dataset by iterating through a list of plants, and passing a filtered
-dataset containing the data for just that plant.
+We also extend our analysis to individual plants by iterating through
+the dataset and creating scatter plots for each plant’s weekly growth.
+This iterative approach enables us to tailor visualizations to the
+characteristics of each plant.
 
 ``` r
 unique_plant_names <- unique(weeklyRootGrowths$Scientific_Name)
@@ -887,14 +873,49 @@ for(plant_name in unique_plant_names){
                              mutate(Plant = plant_name, Plant_Section = "sprout")
                            )
 }
+```
+
+Finally, we output the computed R-squared values and export them to a
+CSV file for future reference and analysis.
+
+``` r
 write_csv(rsquared_data, "rsquared_data.csv") # save our rsquared values into a .csv for later use
 ```
 
 # Conclusion
 
+Our report underscores the pivotal role of R in facilitating the
+creation of clean, reproducible, and high-quality visualizations. These
+visualizations are essential for gaining insights from experimental
+data. Leveraging R’s robust programming capabilities enables us to
+generate a multitude of visualizations, shedding light on the effects of
+bio-priming treatment on plant growth across various species.
+Additionally, by crafting reusable code, we were able to expedite the
+analysis process, and establish a framework that can be applied to
+future research endeavors.
+
+Despite the strengths, our analysis revealed a notable drawback: the
+significant amount of time invested in data cleaning. The issue stemmed
+from the data not being initially formatted for our specific analytical
+needs, outlining the importance of data preparation in experimental
+design. To address this challenge in future studies, it is imperative to
+collaborate closely with data producers to ensure the datasets are
+structured in a manner conducive to analysis.
+
+Looking ahead, several suggestions can be made to enhance the efficiency
+and effectiveness of our analytical approach. Firstly, implementing data
+validation protocols during data collection can mitigate the need for
+extensive cleaning and pre-processing. Additionally, investing in
+training programs to enhance researchers’ proficiency in R programming
+and statistical analysis can foster a more seamless integration of
+computational tools into research workflows. Furthermore, exploring the
+use of machine learning algorithms for automated data cleaning and
+feature extraction may offer opportunities to streamline the analysis
+process further.
+
 # Glossary of Terms
 
-Biopriming  
+Bio-priming  
 The process of coating the seed with a plant-growth promoting bacteria
 consortium comprised of Basillus ceres and pusdomonas
 
