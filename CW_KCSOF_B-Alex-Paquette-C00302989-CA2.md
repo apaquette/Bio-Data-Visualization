@@ -2,7 +2,7 @@ Enhancing Scientific Inquiry with R for Data Manipulation and
 Visualization
 ================
 Alexandre Paquette
-2024-04-15
+2024-04-16
 
 # Introduction
 
@@ -116,32 +116,28 @@ data-driven inquiry.
 
 # Data Manipulation
 
-These are the libraries we’ll be using
+In the pursuit of our research regarding the effective of real-world
+data into insightful visual representation, the ‘Data Manipulation’
+stage serves as a precursor to the visualization process. We will be
+leveraging the capabilities of R programming and relevant libraries such
+as dplyr, tidyr, and readr, in order to prepare our data for
+visualization. We will load our raw data from a CSV file into a
+variable, denoted as ‘bioData’, which will be our foundation for
+subsequent analysis and visualizations. This step facilitates athe
+organization and structuring of our dataset, and enables the exploration
+of key insights and trends within the data.
 
 ``` r
 # for data manipulation:
 library(dplyr)
-```
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
 library(tidyr)
+library(readr)
 
 # for visualization
 library(ggplot2)
 ```
 
-Load the data from the .csv and save it in a variable
+The following code loads our raw data into the bioData variable.
 
 ``` r
 bioData <- read.csv("rawData.csv")
@@ -149,40 +145,39 @@ bioData <- read.csv("rawData.csv")
 
 ## Data Cleanup
 
-Replace all NA values with 0
+In this section, we will refine and restructure our raw data to prepare
+it for visualization and analysis.
+
+Our first step involves address missing values by replacing all NA
+values with 0, ensuring consistency and completeness in our dataset.
 
 ``` r
 bioData[is.na(bioData)] <- 0
 ```
 
-Setting values to be all lower case for consistency (except for Group
-column)
+Subsequently, we will standardize the formatting of key columns by
+converting values to lowercase and categorical data types (factor). This
+facilitates uniformity and ease of analysis.
 
 ``` r
 bioData$Plant.Type <- tolower(bioData$Plant.Type)
 bioData$Control.Experimental <- tolower(bioData$Control.Experimental)
 bioData$Common.Name <- tolower(bioData$Common.Name)
 bioData$Scientific.Name <- tolower(bioData$Scientific.Name)
-```
-
-Converting the Group, Plant Type, and Control/Experimental columns to a
-categorical data type (factor)
-
-``` r
 bioData$Group <- factor(bioData$Group)
 bioData$Plant.Type <- factor(bioData$Plant.Type)
 bioData$Control.Experimental <- factor(bioData$Control.Experimental)
 ```
 
-We will be renaming the columns to fix spelling mistake and apply a
-consistent format to our dataset.
+Additionally, we will rename our columns to correct spelling mistakes
+and maintain a consistent format across our dataset.
 
 ``` r
 bioData <- bioData %>%
   rename(Common_Name = Common.Name,
          Scientific_Name = Scientific.Name,
          Plant_Type = Plant.Type,
-         Controler_Experimental = Control.Experimental,
+         Control_Experimental = Control.Experimental,
          Root_Count = number.of.roots.over.all,
          Sprout_Count = number.of.sprouts.over.all,
          Sprout_Week_1_Change_cm = Change.in.week.1..sprout.,
@@ -196,31 +191,30 @@ bioData <- bioData %>%
          Root_Week_3_Change_cm = change.in.week.3..root.,
          Root_Week_4_Change_cm = change.in.week.4..root.,
          Root_Lengths_cm = Indavidual.lengrths..roots.,
-         Sprout_Lengths_cm = Indavidual.langth..sprouts.
+         Sprout_Lengths_cm = Indavidual.langth..sprouts.,
+         Healthy_Seed_Count = healthy.seed.count
          )
 ```
 
-We want to remove entries that didn’t show any growth for both sprout
-and roots. This means checking for rows that have empty columns for both
-root and sprout growth data.
+To further streamline the dataset, we remove entries that did not
+exhibit growth for both sprouts and roots, enhancing the relevance and
+accuracy of our analysis.
 
 ``` r
-bioData <- bioData %>% filter(Root_Lengths_cm != "" | Sprout_Lengths_cm != "")
+bioData <- bioData %>% filter(Healthy_Seed_Count != 0)
 ```
 
-Now we want to combine matching plant names by control/experimental to
-simplify our data further.
+We consolidate matching plant entries entries by control/experimental
+groups, simplifying the dataset while retaining essential information.
 
 ``` r
 # remove leading and trailing commas
 remove_commas <- function(x) {
   gsub("^,|,$", "", x)
 }
-```
 
-``` r
 bioData <- bioData %>%
-  group_by(Scientific_Name, Controler_Experimental) %>%
+  group_by(Scientific_Name, Control_Experimental) %>%
   summarize(
     Common_Name = first(Common_Name),
     Root_Lengths_cm = remove_commas(paste(Root_Lengths_cm, collapse = ", ")),
@@ -237,7 +231,8 @@ bioData <- bioData %>%
     Root_Week_2_Change_cm = mean(Root_Week_2_Change_cm),
     Root_Week_3_Change_cm = mean(Root_Week_3_Change_cm),
     Root_Week_4_Change_cm = mean(Root_Week_4_Change_cm),
-    Sprout_Lengths_cm = remove_commas(paste(Sprout_Lengths_cm, collapse = ", "))
+    Sprout_Lengths_cm = remove_commas(paste(Sprout_Lengths_cm, collapse = ", ")),
+    Healthy_Seed_Count = sum(Healthy_Seed_Count)
   ) %>%
   ungroup()
 ```
@@ -245,33 +240,27 @@ bioData <- bioData %>%
     ## `summarise()` has grouped output by 'Scientific_Name'. You can override using
     ## the `.groups` argument.
 
-We will generate IDs for each entry so we can identify them uniquely.
+We generate unique identifiers for each entry in the dataset,
+facilitating tracking of individual data points.
 
 ``` r
 bioData <- bioData %>% mutate(id = row_number())
 bioData <- bioData %>% select(id, everything())
 ```
 
-We are extracting the multiple values from the columns so that they can
-be read as individual numbers
+Furthermore, we extract the multiple values from the ‘Root Lengths’ and
+‘Sprout Lengths’ columns, allowing them to be treated as individual
+numeric values for future visualization. By converting these values to
+numeric format, we ensure consistency and accuracy in our dataset.
 
 ``` r
-rootLengthsData <- bioData %>% separate_rows(Root_Lengths_cm, sep = ",") %>% select(id, Root_Length_cm = Root_Lengths_cm)
+rootLengthsData <- bioData %>% 
+  separate_rows(Root_Lengths_cm, sep = ",") %>% 
+  select(id, Root_Length_cm = Root_Lengths_cm)
+
+rootLengthsData <- rootLengthsData %>% 
+  mutate(Root_Length_cm = as.numeric(Root_Length_cm))
 ```
-
-Next we want to convert our Root Length to numeric
-
-``` r
-rootLengthsData <- rootLengthsData %>% mutate(Root_Length_cm = as.numeric(Root_Length_cm))
-```
-
-We’ve now extracted all the individual Root Length for each plant. This
-will allow us to visualize this data more effectively if necessary.
-Regardless, this data needs to exist in this raw form for further
-investigation.
-
-Now we want to repeat this step, but for the sprout length column. Now
-that we know the process, we can complete this in a single step.
 
 ``` r
 sproutLengthsData <- bioData %>%
@@ -279,27 +268,72 @@ sproutLengthsData <- bioData %>%
   select(id, Sprout_Length_cm = Sprout_Lengths_cm) %>%
   mutate(Sprout_Length_cm = as.numeric(Sprout_Length_cm))
 
-sproutLengthsData[is.na(sproutLengthsData)] <- 0
+sproutLengthsData <- sproutLengthsData[complete.cases(sproutLengthsData),]
+
+bioData <- bioData %>% select(-Root_Lengths_cm, -Sprout_Lengths_cm)
 ```
 
-Finally, we can remove the old columns from the dataset
+The extracted root and sprout lengths for each plant are retained in
+their raw form to preserve the integrity of the data for further
+investigation.
+
+Additionally, we extract the weekly change readings for both root and
+sprout growth, consolidating them into separate dataset for analysis.
 
 ``` r
-bioData <- bioData %>% select(-Root_Lengths_cm, -Sprout_Lengths_cm)
+weeklyRootGrowths <- gather(
+                      select(bioData, 
+                            id, Scientific_Name, Control_Experimental, Common_Name, Plant_Type,
+                            "1" = Root_Week_1_Change_cm, 
+                            "2" = Root_Week_2_Change_cm, 
+                            "3" = Root_Week_3_Change_cm, 
+                            "4" = Root_Week_4_Change_cm), 
+                      key = "week", 
+                      value = "measurement_cm",
+                      -id, -Scientific_Name, -Control_Experimental, -Common_Name, -Plant_Type)
+weeklyRootGrowths <- weeklyRootGrowths %>% mutate(week = as.numeric(week))
+```
+
+``` r
+weeklySproutGrowths <- gather(
+                      select(bioData, 
+                            id, Scientific_Name, Control_Experimental, Common_Name, Plant_Type,
+                            "1" = Sprout_Week_1_Change_cm, 
+                            "2" = Sprout_Week_2_Change_cm, 
+                            "3" = Sprout_Week_3_Change_cm, 
+                            "4" = Sprout_Week_4_Change_cm), 
+                      key = "week", 
+                      value = "measurement_cm",
+                      -id, -Scientific_Name, -Control_Experimental, -Common_Name, -Plant_Type)
+weeklySproutGrowths <- weeklySproutGrowths %>% 
+  mutate(week = as.numeric(week))
+```
+
+These data cleanup steps culminate in the removal of redundant columns
+from our main dataset.
+
+``` r
+bioData <- bioData %>% select(-Root_Week_1_Change_cm, -Root_Week_2_Change_cm, -Root_Week_3_Change_cm, -Root_Week_4_Change_cm, -Sprout_Week_1_Change_cm, -Sprout_Week_2_Change_cm, -Sprout_Week_3_Change_cm, -Sprout_Week_4_Change_cm)
 ```
 
 ## Derive New Data
 
-Next we need to extract insights from our data. We will be adding
-columns to our main dataset to calculate the following: - Average and
-median root/stem lengths - Average growth over time for root and sprout
+In this stage, we will go through the process of extracting new
+information from our dataset by deriving metrics and indicators. To
+enhance our understanding of the effect of biopriming on plant growth,
+we can augment our original dataset with additional columns to calculate
+key measures such as average and median root and stem lengths.
+Furthermore, we compute the average growth over time for both root and
+sprout dimensions. By integrating these derived metrics into our
+dataset, we enable deeper exploration and interpretation of the data.
 
-### Calculate average and median
+### Calculate average and median, and standard deviation
 
-This method will be used to perform calculations on a given dataset and
-append the results to the main dataset. In this case, we’ll be passing
-`bioData` as our main dataset, and then `rootLengthsData` or
-`sproutLengthsData` depending on the calculation we want to make.
+In this section, we introduce a versatile method designed to compute
+summary statistics on a given dataset and append the results to the main
+dataset. The function `calculate_summar` takes as input the main dataset
+(`bioData`) and a summary dataset (`rootLengthsData` or
+`sproutLengthsData`) depending on the specific calculation required.
 
 ``` r
 calculate_summary <- function(main_data, summary_data, id_col, summary_col, summary_name, summary_method){
@@ -314,39 +348,45 @@ calculate_summary <- function(main_data, summary_data, id_col, summary_col, summ
 }
 ```
 
+With this method, we can compute key metrics such as average, median,
+and standard deviation for both root and sprout lengths. The function
+`calculate_summary` facilitates efficient aggregation and integration of
+summary statistics into our main dataset.
+
 ``` r
 bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length_cm, avg_root_length_cm, mean) # average root length
+bioData <- mutate(bioData, avg_root_length_cm = avg_root_length_cm / Healthy_Seed_Count)
 bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length_cm, avg_sprout_length_cm, mean) # average sprout length
+bioData <- mutate(bioData, avg_sprout_length_cm = avg_sprout_length_cm / Healthy_Seed_Count)
 bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length_cm, median_root_length_cm, median) # Median sprout length
 bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length_cm, median_sprout_length_cm, median) # Median sprout length
 bioData <- calculate_summary(bioData, rootLengthsData, id, Root_Length_cm, root_length_sd, sd) # root length standard deviation
+bioData <- mutate(bioData, root_length_sd = root_length_sd / Healthy_Seed_Count)
 bioData <- calculate_summary(bioData, sproutLengthsData, id, Sprout_Length_cm, sprout_length_sd, sd) # sprout length standard deviation
-
-# set all na values to 0
-bioData[is.na(bioData)] <- 0
+bioData <- mutate(bioData, sprout_length_sd = sprout_length_sd / Healthy_Seed_Count)
 ```
 
-### Calculate average growth over time
+# Data Visualization with R
+
+Using R programming, researchers can unlock new insights, uncover hidden
+patterns, and communicate their findings with clarity and precision. In
+this section, we explore how to perform data visualization with R, using
+the `ggplot2` library. We explore various techniques and methodologies
+for visualizing our data by leveraging the rich functionality and
+flexibility offered by R. We will examine visualizations created in
+Excel and identify limitations that can be overcome by using R and
+`ggplot2`.
+
+## Old Visualizations (using excel)
+
+## Using Functions in R
+
+This is a re-usable function that generates a bar chart based on
+parameters supplied.
 
 ``` r
-bioData <- cbind(bioData, 
-                 avg_root_growth_per_week_cm =
-                   rowSums(bioData %>% 
-                             select(Root_Week_1_Change_cm, Root_Week_2_Change_cm, Root_Week_3_Change_cm, Root_Week_4_Change_cm)))
-```
-
-``` r
-bioData <- cbind(bioData, 
-                 avg_sprout_growth_per_week_cm =
-                   rowSums(bioData %>% 
-                             select(Sprout_Week_1_Change_cm, Sprout_Week_2_Change_cm, Sprout_Week_3_Change_cm, Sprout_Week_4_Change_cm)))
-```
-
-# Data Visualization
-
-``` r
-create_bar_plot <- function(data, x_val, y_val, fill_val, sd = NULL, titleName, subtitleName = NULL, x_title, y_title, legend = TRUE, ...){
-  colors <- c("experimental" = "#7cb5ec", "control" = "#f7a35c")
+create_bar_plot <- function(data, x_val, y_val, fill_val, sd = NULL, titleName, subtitleName = "", x_title, y_title, legend = TRUE, hideXAxisText = FALSE,...){
+  colors <- c("control" = "#7cb5ec", "experimental" = "#f7a35c")
   
   chart <- ggplot(data, aes(x = {{x_val}}, y = {{y_val}}, fill = {{fill_val}})) +
           geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.6) +
@@ -359,209 +399,496 @@ create_bar_plot <- function(data, x_val, y_val, fill_val, sd = NULL, titleName, 
                   panel.background = element_rect(fill = "white"))  # Rotate x-axis labels for better readability
   
   if(!missing(sd)){
-    chart <- chart + geom_errorbar(aes(ymin = pmax({{y_val}} - {{sd}}, 0), ymax = {{y_val}} + {{sd}}), width = 0.4, position = position_dodge(width = 0.8))
+    sd_filter <- !is.null(data[[deparse(substitute(sd))]]) & data[[deparse(substitute(sd))]] > 0
+    chart <- chart + geom_errorbar(aes(ymin = pmax({{y_val}} - {{sd}}, 0), 
+                                        ymax = {{y_val}} + {{sd}}), 
+                                        width = 0.4, 
+                                        position = position_dodge(width = 0.8), na.rm = TRUE)
   }
   
-  if(!missing(subtitleName)){
-    chart <- chart + theme(plot.subtitle = element_text(size = 16))
-  }
-  
-  if(legend == FALSE){
+  if(!legend){
     chart <- chart + guides(fill = FALSE)
   }
   
-  fileName <- paste("charts/",titleName,".png")
+  if(hideXAxisText){
+    chart <- chart + theme(axis.text.x = element_blank()) + labs(x = "")
+  }
+  
+  fileName <- paste("charts/",titleName,subtitleName,".png")
   suppressMessages(ggsave(fileName, chart))
   return(chart)
 }
 ```
 
-What do we need to show? - growth differences for roots and sprouts
-between control/experimental
-
-## Root Growth Average comparison
+This is a re-usable function that generates a scatter plot chart based
+on parameters supplied.
 
 ``` r
-create_bar_plot(data = bioData,
-                x_val = Scientific_Name,
-                y_val = avg_root_growth_per_week_cm,
-                fill_val = Controler_Experimental,
-                sd = root_length_sd,
-                titleName = "Average Root Growth",
-                subtitleName = "per week over 4 weeks",
-                x_title = "Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
+create_scatter_plot <- function(data, x_val, y_val, fill_val, line_of_best_fit = FALSE, growth_curve = FALSE, titleName, subtitleName = "", x_title, y_title, legend = TRUE, hideXAxisText = FALSE,...){
+  colors <- c("experimental" = "#7cb5ec", "control" = "#f7a35c")
+  
+  fileName <- paste("charts/",titleName,subtitleName)
+  
+  chart <- ggplot(data, aes(x = {{x_val}}, y = {{y_val}}, color = {{fill_val}})) + 
+    geom_point() +
+    scale_color_manual(values = colors, name = "") +
+    labs(title = titleName, subtitle = subtitleName, x = x_title, y = y_title) +
+    theme(plot.title = element_text(size = 20),
+          plot.margin = margin(30, 30, 30, 30, "pt"),
+          plot.background = element_rect(fill = "white"),      # Set plot background color
+          panel.background = element_rect(fill = "white"))  # Rotate x-axis labels for better
+
+  if(line_of_best_fit){
+    chart <- chart + 
+      geom_smooth(method = "lm", 
+                  formula = y ~ x, 
+                  se = TRUE,
+                  aes(group = Control_Experimental), 
+                  stat = "smooth", 
+                  fullrange = TRUE)
+    fileName <- paste(fileName, "_lobf")
+  }
+
+  if(growth_curve){
+    chart <- chart + 
+        geom_smooth(method = "loess", 
+                    formula = y ~ x, 
+                    se = FALSE,
+                    aes(group = Control_Experimental), 
+                    stat = "smooth", 
+                    fullrange = TRUE)
+    fileName <- paste(fileName, "_gc")
+  }
+  fileName <- paste(fileName, ".png")
+  suppressMessages(ggsave(fileName, chart))
+
+  return(chart)
+}
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
-
-This chart illustrates the average root growth for monocot plants
-comparing control and experimental.
+This is a re-usable function that calculates the r-squared value of a
+line of a best fit given a dataset, assuming the line was computer using
+linear regression.
 
 ``` r
-create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
+get_r_squared <- function(data, grouping, value, category){
+  r_squared <- data %>% 
+    group_by(!!sym(grouping)) %>% 
+    summarise(rsquared = summary(lm(as.formula(paste0(value, " ~ ", category))))$r.squared)
+  return(r_squared)
+}
+```
+
+## Bar charts with R
+
+For the length average comparison, we have two values we can visualize:
+root lengths, and sprout lengths. Below we will create a dataset derived
+from our main bioData datset to visualize our root and sprout length
+data.
+
+``` r
+bioDataRoot <- bioData %>%
+              group_by(Scientific_Name) %>%
+              filter(n() == 2) %>%
+              filter(all(avg_root_length_cm != 0))
+```
+
+``` r
+bioDataSprout <- bioData %>%
+              group_by(Scientific_Name) %>%
+              filter(n() == 2) %>%
+              filter(all(avg_sprout_length_cm != 0))
+```
+
+Using our create_bar_plot function from earlier, we are creating a
+visualization to illustrate the average root length by comparing each
+control sample to the experimental sample. We are also displaying the
+standard deviation of each sample if available.
+
+The following code creates the visualization for the average root
+lengths.
+
+``` r
+create_bar_plot(data = bioDataRoot,
                 x_val = Scientific_Name,
-                y_val = avg_root_growth_per_week_cm,
-                fill_val = Controler_Experimental,
+                y_val = avg_root_length_cm,
+                fill_val = Control_Experimental,
                 sd = root_length_sd,
-                titleName = "Average Root Growth for monocot plants",
-                subtitleName = "per week over 4 weeks",
-                x_title = "Monocot Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
+                titleName = "Average Root Length",
+                x_title = "Plant Species",
+                y_title = "Avg Length (cm)")
 ```
 
 ![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
-This chart illustrates the average root growth for dicot plants
-comparing control and experimental.
+The following code creates the visualization for the average sprout
+lengths.
 
 ``` r
-create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
+create_bar_plot(data = bioDataSprout,
                 x_val = Scientific_Name,
-                y_val = avg_root_growth_per_week_cm,
-                fill_val = Controler_Experimental,
-                sd = root_length_sd,
-                titleName = "Average Root Growth for dicot plants",
-                subtitleName = "per week over 4 weeks",
-                x_title = "Dicot Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
+                y_val = avg_sprout_length_cm,
+                fill_val = Control_Experimental,
+                sd = sprout_length_sd,
+                titleName = "Average Sprout Length",
+                x_title = "Plant Species",
+                y_title = "Avg Length (cm)")
 ```
 
 ![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
-This generates a chart for each individual plant that compares the
-control and experimental sample for root growth.
+Next, we want to create visualizations for just monocot and dicot
+plants. Effectively, we want to filter our selection to just monocot or
+dicot depending on the visualization. We can do this for both root and
+sprout lengths.
+
+The following code creates a visualization for the average root lengths
+for just plants
 
 ``` r
-unique_plant_names <- unique(bioData$Scientific_Name)
-# Iterate through each unique plant name
-for(plant_name in unique_plant_names){
-  # Generate a chart for the current plant
-  create_bar_plot(data = filter(bioData, Scientific_Name == plant_name),
-                  x_val = Scientific_Name,
-                  y_val = avg_root_growth_per_week_cm,
-                  fill_val = Controler_Experimental,
-                  sd = root_length_sd,
-                  titleName = paste("Average Root Growth for",plant_name),
-                  subtitleName = "per week over 4 weeks",
-                  x_title = "Plant Species",
-                  y_title = "Weekly Overall Growth Avg (cm)")
-}
+create_bar_plot(data = subset(bioDataRoot, Plant_Type == "monocot"),
+                x_val = Scientific_Name,
+                y_val = avg_root_length_cm,
+                fill_val = Control_Experimental,
+                sd = root_length_sd,
+                titleName = "Average Root Length",
+                subtitleName = "for monocot plants",
+                x_title = "Monocot Plant Species",
+                y_title = "Avg Length (cm)")
 ```
 
-This generates a chart for the average root growth for all dicot plants
-comparing the control and experimental samples
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+
+The following code creates a visualization for the average root lengths
+for dicot plants.
 
 ``` r
-create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
+create_bar_plot(data = subset(bioDataRoot, Plant_Type == "dicot"),
                 x_val = Scientific_Name,
-                y_val = avg_root_growth_per_week_cm,
-                fill_val = Controler_Experimental,
+                y_val = avg_root_length_cm,
+                fill_val = Control_Experimental,
                 sd = root_length_sd,
-                titleName = "Average Root Growth for dicot plants",
-                subtitleName = "per week over 4 weeks",
+                titleName = "Average Root Length",
+                subtitleName = "for dicot plants",
                 x_title = "Dicot Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
+                y_title = "Avg Length (cm)")
 ```
 
 ![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
-## Sprout Growth Average comparison
+The following code creates a visualization for the average sprout
+lengths for monocot plants.
 
 ``` r
-create_bar_plot(data = bioData,
+create_bar_plot(data = subset(bioDataSprout, Plant_Type == "monocot"),
                 x_val = Scientific_Name,
-                y_val = avg_sprout_growth_per_week_cm,
-                fill_val = Controler_Experimental,
+                y_val = avg_sprout_length_cm,
+                fill_val = Control_Experimental,
                 sd = sprout_length_sd,
-                titleName = "Average Sprout Growth",
-                subtitleName = "per week over 4 weeks",
-                x_title = "Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
+                titleName = "Average Sprout Length ",
+                subtitleName = "for monocot plants",
+                x_title = "Monocot Plant Species",
+                y_title = "Avg Length (cm)")
 ```
 
 ![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
-This generates a chart for each individual plant that compares the
-control and experimental sample for sprout growth.
+The following code creates a visualization for the average sprout
+lengths for dicot plants.
 
 ``` r
+create_bar_plot(data = subset(bioDataSprout, Plant_Type == "dicot"),
+                x_val = Scientific_Name,
+                y_val = avg_sprout_length_cm,
+                fill_val = Control_Experimental,
+                sd = sprout_length_sd,
+                titleName = "Average Sprout Length",
+                subtitleName = "for dicot plants",
+                x_title = "Dicot Plant Species",
+                y_title = "Avg Length (cm)")
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+
+The following section illustrates how we can leverage R as a programming
+language and produce multiple visualizations all at once. In this case,
+we have a total of 15 plants we need to generate visualizations for.
+Each plant needs a visualization for root and sprout lengths, resulting
+in nearly 30 visualizations for this aspect of the data alone. By
+writing a script that iterates through each plant, we can quickly
+produce these visualizations using our create_bar_plot function.
+
+The following code generates visualizations for each plant in the
+dataset by iterating through a list of plants, and passing a filtered
+dataset containing the data for just that plant.
+
+``` r
+unique_plant_names <- unique(bioDataRoot$Scientific_Name)
 # Iterate through each unique plant name
 for(plant_name in unique_plant_names){
   # Generate a chart for the current plant
-  create_bar_plot(data = filter(bioData, Scientific_Name == plant_name),
+  create_bar_plot(data = filter(bioDataRoot, Scientific_Name == plant_name),
                   x_val = Scientific_Name,
-                  y_val = avg_sprout_growth_per_week_cm,
-                  fill_val = Controler_Experimental,
-                  sd = sprout_length_sd,
-                  titleName = paste("Average Sprout Growth for",plant_name),
-                  subtitleName = "per week over 4 weeks",
+                  y_val = avg_root_length_cm,
+                  fill_val = Control_Experimental,
+                  sd = root_length_sd,
+                  titleName = "Average Root Length",
+                  subtitleName = paste("for ", plant_name),
                   x_title = "Plant Species",
-                  y_title = "Weekly Overall Growth Avg (cm)")
+                  y_title = "Avg Length (cm)",
+                  hideXAxisText = TRUE)
 }
 ```
 
+The following code generates visualizations does the same as the
+previous code chunk, but for average sprout lengths.
+
 ``` r
-create_bar_plot(data = subset(bioData, Plant_Type == "monocot"),
-                x_val = Scientific_Name,
-                y_val = avg_sprout_growth_per_week_cm,
-                fill_val = Controler_Experimental,
-                sd = sprout_length_sd,
-                titleName = "Average Sprout Growth for monocot plants",
-                subtitleName = "per week over 4 weeks",
-                x_title = "Monocot Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
+unique_plant_names <- unique(bioDataSprout$Scientific_Name)
+# Iterate through each unique plant name
+for(plant_name in unique_plant_names){
+  # Generate a chart for the current plant
+  create_bar_plot(data = filter(bioDataSprout, Scientific_Name == plant_name),
+                  x_val = Scientific_Name,
+                  y_val = avg_sprout_length_cm,
+                  fill_val = Control_Experimental,
+                  sd = sprout_length_sd,
+                  titleName = "Average Sprout Length",
+                  subtitleName = paste("for ", plant_name),
+                  x_title = "Plant Species",
+                  y_title = "Avg Length (cm)",
+                  hideXAxisText = TRUE)
+}
 ```
 
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
+Finally, we can display the plant distribution between our control and
+experimental to show how many resulted in higher averages between the
+control and experimental.
+
+The following code compares the average root length between control or
+experimental, and adds them to the sum of either control or
+experimental. It then passes the resulting dataset to our method to
+display the information visually.
 
 ``` r
-create_bar_plot(data = subset(bioData, Plant_Type == "dicot"),
-                x_val = Scientific_Name,
-                y_val = avg_sprout_growth_per_week_cm,
-                fill_val = Controler_Experimental,
-                sd = sprout_length_sd,
-                titleName = "Average Sprout Growth for dicot plants",
-                subtitleName = "per week over 4 weeks",
-                x_title = "Dicot Plant Species",
-                y_title = "Weekly Overall Growth Avg (cm)")
-```
-
-![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
-
-- control best count
-- experimental best count
-
-``` r
-better_growth <- bioData %>%
+higher_length <- bioDataRoot %>%
   group_by(Scientific_Name) %>% 
   summarise(
-    better_growth_control = sum(avg_root_growth_per_week_cm[Controler_Experimental == "control"] > avg_root_growth_per_week_cm[Controler_Experimental == "experimental"]),
-    better_growth_experimental = sum(avg_root_growth_per_week_cm[Controler_Experimental == "experimental"] > avg_root_growth_per_week_cm[Controler_Experimental == "control"])
+    higher_length_control = sum(avg_root_length_cm[Control_Experimental == "control"] > avg_root_length_cm[Control_Experimental == "experimental"]),
+    higher_length_experimental = sum(avg_root_length_cm[Control_Experimental == "experimental"] > avg_root_length_cm[Control_Experimental == "control"])
   ) %>%
   summarise(
-    better_growth_control = sum(better_growth_control),
-    better_growth_experimental = sum(better_growth_experimental)
+    higher_length_control = sum(higher_length_control),
+    higher_length_experimental = sum(higher_length_experimental)
   ) %>%
-  pivot_longer(cols = starts_with("better_growth"), names_to = "Category", values_to = "total_count") %>%
-  mutate(Category = gsub("better_growth_", "",Category)) %>%
-  mutate (sd = 0)
+  pivot_longer(cols = starts_with("higher_length"), names_to = "Category", values_to = "total_count") %>%
+  mutate(Category = gsub("higher_length_", "",Category))
 
-chart <- create_bar_plot(data = better_growth,
+create_bar_plot(data = higher_length,
                 x_val = Category,
                 y_val = total_count,
                 fill_val = Category,
-                titleName = "Better Root Growth per Condition",
-                subtitleName = "",
-                x_title = "Condition",
+                titleName = "Higher Average Root Length",
+                subtitleName = "per Condition",
+                x_title = "Plant Species",
                 y_title = "Number of plants",
-                legend = FALSE)
-chart
+                hideXAxisText = TRUE)
 ```
 
 ![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
 
-- growth over time chart
+The following code does the same thing as the previous chunk, but for
+sprout length.
+
+``` r
+higher_length <- bioDataSprout %>%
+  group_by(Scientific_Name) %>% 
+  summarise(
+    higher_length_control = sum(avg_sprout_length_cm[Control_Experimental == "experimental"] > avg_sprout_length_cm[Control_Experimental == "control"]),
+    higher_length_experimental = sum(avg_sprout_length_cm[Control_Experimental == "control"] > avg_sprout_length_cm[Control_Experimental == "experimental"])
+  ) %>%
+  summarise(
+    higher_length_control = sum(higher_length_control),
+    higher_length_experimental = sum(higher_length_experimental)
+  ) %>%
+  pivot_longer(cols = starts_with("higher_length"), names_to = "Category", values_to = "total_count") %>%
+  mutate(Category = gsub("higher_length_", "",Category)) %>%
+  mutate (sd = 0)
+
+create_bar_plot(data = higher_length,
+                x_val = Category,
+                y_val = total_count,
+                fill_val = Category,
+                titleName = "Higher Average Sprout Length",
+                subtitleName = "per Condition",
+                x_title = "Plant Species",
+                y_title = "Number of plants",
+                hideXAxisText = TRUE)
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+
+## Scatter plots with R
+
+Here we know we have one of our plants in our dataset that doesn’t have
+any corresponding control, so we need to remove it from the dataset.
+
+``` r
+weeklyRootGrowths <- weeklyRootGrowths %>% filter(Scientific_Name != "antirrhinum majus")
+weeklySproutGrowths <- weeklySproutGrowths %>% filter(Scientific_Name != "antirrhinum majus")
+```
+
+Using our create_scatter_plot function from earlier, we are creating a
+visualization to illustrate the average root growth by comparing each
+control sample to the experimental sample. We are also using our
+get_r_squared method to return the r_squared value of the line of best
+fit using linear regression.
+
+The following code creates the visualization for the average root growth
+over 4 weeks, and calculates the r_squared value for the control and
+experimental. Two visualizations are produced: one with a line of best
+fit, and one with a growth curve.
+
+``` r
+create_scatter_plot(data = weeklyRootGrowths, 
+                    x_val = week, 
+                    y_val = measurement_cm, 
+                    fill_val = Control_Experimental,
+                    line_of_best_fit = TRUE,
+                    titleName = "Weekly Root Growth",
+                    x_title = "Week", 
+                    y_title = "Measurments (cm)")
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+
+``` r
+create_scatter_plot(data = weeklyRootGrowths, 
+                    x_val = week, 
+                    y_val = measurement_cm, 
+                    fill_val = Control_Experimental,
+                    growth_curve = TRUE,
+                    titleName = "Weekly Root Growth",
+                    x_title = "Week", 
+                    y_title = "Measurments (cm)")
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-33-2.png)<!-- -->
+
+``` r
+rsquared_data <- get_r_squared(data = weeklyRootGrowths, grouping = "Control_Experimental", value = "measurement_cm", category = "week") %>% 
+                  mutate(Plant = "All Plants", Plant_Section = "root")
+```
+
+The following code does the same as the previous chunk, but for sprout
+growth.
+
+``` r
+create_scatter_plot(data = weeklySproutGrowths, 
+                    x_val = week, 
+                    y_val = measurement_cm, 
+                    fill_val = Control_Experimental,
+                    line_of_best_fit = TRUE,
+                    titleName = "Weekly Sprout Growth", 
+                    x_title = "Week", 
+                    y_title = "Measurments (cm)")
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+
+``` r
+create_scatter_plot(data = weeklySproutGrowths, 
+                    x_val = week, 
+                    y_val = measurement_cm, 
+                    fill_val = Control_Experimental,
+                    growth_curve = TRUE,
+                    titleName = "Weekly Sprout Growth", 
+                    x_title = "Week", 
+                    y_title = "Measurments (cm)")
+```
+
+![](CW_KCSOF_B-Alex-Paquette-C00302989-CA2_files/figure-gfm/unnamed-chunk-34-2.png)<!-- -->
+
+``` r
+rsquared_data <- bind_rows(rsquared_data, 
+                           get_r_squared(data = weeklySproutGrowths, grouping = "Control_Experimental", value = "measurement_cm", category = "week") %>%
+                             mutate(Plant = "All Plants", Plant_Section = "sprout")
+                           )
+```
+
+As with our column visualizations, we can leverage R programming to
+produce multiple visualizations using our pre-defined method.
+
+The following code generates visualizations for each plant in the
+dataset by iterating through a list of plants, and passing a filtered
+dataset containing the data for just that plant.
+
+``` r
+unique_plant_names <- unique(weeklyRootGrowths$Scientific_Name)
+# Iterate through each unique plant name
+for(plant_name in unique_plant_names){
+  # Generate a chart for the current plant
+  create_scatter_plot(data = filter(weeklyRootGrowths, Scientific_Name == plant_name),
+                      x_val = week,
+                      y_val = measurement_cm,
+                      fill_val = Control_Experimental,
+                      line_of_best_fit = TRUE,
+                      titleName = "Weekly Root Growth",
+                      subtitleName = paste("for ", plant_name),
+                      x_title = "Week",
+                      y_title = "Measurments (cm)")
+  
+  create_scatter_plot(data = filter(weeklyRootGrowths, Scientific_Name == plant_name),
+                      x_val = week,
+                      y_val = measurement_cm,
+                      fill_val = Control_Experimental,
+                      growth_curve = TRUE,
+                      titleName = "Weekly Root Growth",
+                      subtitleName = paste("for ", plant_name),
+                      x_title = "Week",
+                      y_title = "Measurments (cm)")
+  rsquared_data <- bind_rows(rsquared_data, 
+                           get_r_squared(data = filter(weeklyRootGrowths, Scientific_Name == plant_name), 
+                                         grouping = "Control_Experimental", 
+                                         value = "measurement_cm", category = "week") %>%
+                             mutate(Plant = plant_name, Plant_Section = "root")
+                           )
+}
+```
+
+``` r
+unique_plant_names <- unique(weeklySproutGrowths$Scientific_Name)
+# Iterate through each unique plant name
+for(plant_name in unique_plant_names){
+  # Generate a chart for the current plant
+  create_scatter_plot(data = filter(weeklySproutGrowths, Scientific_Name == plant_name),
+                      x_val = week,
+                      y_val = measurement_cm,
+                      fill_val = Control_Experimental,
+                      line_of_best_fit = TRUE,
+                      titleName = "Weekly Sprout Growth",
+                      subtitleName = paste("for ", plant_name),
+                      x_title = "Week",
+                      y_title = "Measurments (cm)")
+  
+  create_scatter_plot(data = filter(weeklySproutGrowths, Scientific_Name == plant_name),
+                      x_val = week,
+                      y_val = measurement_cm,
+                      fill_val = Control_Experimental,
+                      growth_curve = TRUE,
+                      titleName = "Weekly Sprout Growth",
+                      subtitleName = paste("for ", plant_name),
+                      x_title = "Week",
+                      y_title = "Measurments (cm)")
+    rsquared_data <- bind_rows(rsquared_data, 
+                           get_r_squared(data = filter(weeklySproutGrowths, Scientific_Name == plant_name), 
+                                         grouping = "Control_Experimental", 
+                                         value = "measurement_cm", category = "week") %>%
+                             mutate(Plant = plant_name, Plant_Section = "sprout")
+                           )
+}
+write_csv(rsquared_data, "rsquared_data.csv") # save our rsquared values into a .csv for later use
+```
 
 # Conclusion
 
