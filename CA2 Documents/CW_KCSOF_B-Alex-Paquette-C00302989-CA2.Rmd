@@ -10,11 +10,11 @@ lecturer: "Agnes Maciocha"
 date: "17th April, 2024"
 word count: "2082"
 output:
-  github_document:
-    toc: true
   word_document:
     toc: true
     fig_caption: yes
+  github_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -83,6 +83,13 @@ library(readr)
 # for visualization
 library(ggplot2)
 ```
+
+```{r}
+if (!file.exists("charts/")) {
+  dir.create("charts/", recursive = TRUE)
+}
+```
+
 
 The following code loads our raw data into the bioData variable.
 

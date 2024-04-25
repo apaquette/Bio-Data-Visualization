@@ -1,0 +1,113 @@
+id,Scientific_Name,Control_Experimental,Common_Name,Plant_Type,week,measurement_cm
+1,allium cepa,control,onion,monocot,1,0.6
+2,allium cepa,experimental,onion,monocot,1,0.5
+3,allium tuberosum,control,garlic,monocot,1,0
+4,allium tuberosum,experimental,garlic,monocot,1,0.2
+6,brassica oleracea var. capitata,control,cabbage,dicot,1,0
+7,brassica oleracea var. capitata,experimental,cabbage,dicot,1,0.6
+8,echeveria sedum,control,succulent,dicot,1,0.275
+9,echeveria sedum,experimental,succulent,dicot,1,0
+10,helianthus annuus,control,common sunflower,dicot,1,0.75
+11,helianthus annuus,experimental,common sunflower,dicot,1,0.5
+12,lathyrus odoratus,control,sweet pea,dicot,1,0
+13,lathyrus odoratus,experimental,sweet pea,dicot,1,0
+14,lythrum salicaria,control,purple loosestrife,dicot,1,0
+15,lythrum salicaria,experimental,purple loosestrife,dicot,1,0
+16,narcissus pseudonarcissus,control,daffodil,monocot,1,0
+17,narcissus pseudonarcissus,experimental,daffodil,monocot,1,0.7
+18,ocimum basilicum,control,basil,dicot,1,0.4
+19,ocimum basilicum,experimental,basil,dicot,1,0.15
+20,petunia integrifolia,control,petunia,dicot,1,0.065
+21,petunia integrifolia,experimental,petunia,dicot,1,0.25
+22,secale cereale,control,rye,monocot,1,0.6
+23,secale cereale,experimental,rye,monocot,1,0.6
+24,solanum lycopersicum,control,tomato,dicot,1,0.7
+25,solanum lycopersicum,experimental,tomato,dicot,1,0
+26,triticum aestivum,control,wheat,monocot,1,1
+27,triticum aestivum,experimental,wheat,monocot,1,1.3
+28,zea mays,control,maize,monocot,1,0
+29,zea mays,experimental,maize,monocot,1,0
+1,allium cepa,control,onion,monocot,2,1.2349999999999999
+2,allium cepa,experimental,onion,monocot,2,1.2
+3,allium tuberosum,control,garlic,monocot,2,1
+4,allium tuberosum,experimental,garlic,monocot,2,0.65
+6,brassica oleracea var. capitata,control,cabbage,dicot,2,0.79
+7,brassica oleracea var. capitata,experimental,cabbage,dicot,2,0.85
+8,echeveria sedum,control,succulent,dicot,2,1.2
+9,echeveria sedum,experimental,succulent,dicot,2,1.2
+10,helianthus annuus,control,common sunflower,dicot,2,1
+11,helianthus annuus,experimental,common sunflower,dicot,2,0.75
+12,lathyrus odoratus,control,sweet pea,dicot,2,0
+13,lathyrus odoratus,experimental,sweet pea,dicot,2,0.75
+14,lythrum salicaria,control,purple loosestrife,dicot,2,1.3
+15,lythrum salicaria,experimental,purple loosestrife,dicot,2,0
+16,narcissus pseudonarcissus,control,daffodil,monocot,2,1.65
+17,narcissus pseudonarcissus,experimental,daffodil,monocot,2,1.2
+18,ocimum basilicum,control,basil,dicot,2,1.45
+19,ocimum basilicum,experimental,basil,dicot,2,0.5
+20,petunia integrifolia,control,petunia,dicot,2,1.7
+21,petunia integrifolia,experimental,petunia,dicot,2,0.7
+22,secale cereale,control,rye,monocot,2,1.75
+23,secale cereale,experimental,rye,monocot,2,1.15
+24,solanum lycopersicum,control,tomato,dicot,2,1.2
+25,solanum lycopersicum,experimental,tomato,dicot,2,0.55
+26,triticum aestivum,control,wheat,monocot,2,1.5
+27,triticum aestivum,experimental,wheat,monocot,2,2.8
+28,zea mays,control,maize,monocot,2,1.4
+29,zea mays,experimental,maize,monocot,2,1.15
+1,allium cepa,control,onion,monocot,3,1.635
+2,allium cepa,experimental,onion,monocot,3,1.1
+3,allium tuberosum,control,garlic,monocot,3,1.25
+4,allium tuberosum,experimental,garlic,monocot,3,1.4
+6,brassica oleracea var. capitata,control,cabbage,dicot,3,2.3
+7,brassica oleracea var. capitata,experimental,cabbage,dicot,3,1
+8,echeveria sedum,control,succulent,dicot,3,1.5
+9,echeveria sedum,experimental,succulent,dicot,3,0.7
+10,helianthus annuus,control,common sunflower,dicot,3,1.6
+11,helianthus annuus,experimental,common sunflower,dicot,3,1.25
+12,lathyrus odoratus,control,sweet pea,dicot,3,0
+13,lathyrus odoratus,experimental,sweet pea,dicot,3,0.85
+14,lythrum salicaria,control,purple loosestrife,dicot,3,1.8
+15,lythrum salicaria,experimental,purple loosestrife,dicot,3,0
+16,narcissus pseudonarcissus,control,daffodil,monocot,3,2
+17,narcissus pseudonarcissus,experimental,daffodil,monocot,3,1.75
+18,ocimum basilicum,control,basil,dicot,3,1.55
+19,ocimum basilicum,experimental,basil,dicot,3,0.75
+20,petunia integrifolia,control,petunia,dicot,3,1.55
+21,petunia integrifolia,experimental,petunia,dicot,3,1.6
+22,secale cereale,control,rye,monocot,3,2.65
+23,secale cereale,experimental,rye,monocot,3,2.35
+24,solanum lycopersicum,control,tomato,dicot,3,1.4
+25,solanum lycopersicum,experimental,tomato,dicot,3,1.5
+26,triticum aestivum,control,wheat,monocot,3,2.06
+27,triticum aestivum,experimental,wheat,monocot,3,1.9
+28,zea mays,control,maize,monocot,3,2.275
+29,zea mays,experimental,maize,monocot,3,1.7
+1,allium cepa,control,onion,monocot,4,2.5
+2,allium cepa,experimental,onion,monocot,4,1.3
+3,allium tuberosum,control,garlic,monocot,4,0.9
+4,allium tuberosum,experimental,garlic,monocot,4,0.6
+6,brassica oleracea var. capitata,control,cabbage,dicot,4,2.1
+7,brassica oleracea var. capitata,experimental,cabbage,dicot,4,1.7000000000000002
+8,echeveria sedum,control,succulent,dicot,4,0.55
+9,echeveria sedum,experimental,succulent,dicot,4,0.8
+10,helianthus annuus,control,common sunflower,dicot,4,1.1
+11,helianthus annuus,experimental,common sunflower,dicot,4,1.45
+12,lathyrus odoratus,control,sweet pea,dicot,4,0
+13,lathyrus odoratus,experimental,sweet pea,dicot,4,1
+14,lythrum salicaria,control,purple loosestrife,dicot,4,3.7
+15,lythrum salicaria,experimental,purple loosestrife,dicot,4,0
+16,narcissus pseudonarcissus,control,daffodil,monocot,4,1.65
+17,narcissus pseudonarcissus,experimental,daffodil,monocot,4,2.05
+18,ocimum basilicum,control,basil,dicot,4,2.7
+19,ocimum basilicum,experimental,basil,dicot,4,0.75
+20,petunia integrifolia,control,petunia,dicot,4,1.615
+21,petunia integrifolia,experimental,petunia,dicot,4,2
+22,secale cereale,control,rye,monocot,4,2.65
+23,secale cereale,experimental,rye,monocot,4,2.05
+24,solanum lycopersicum,control,tomato,dicot,4,2.8
+25,solanum lycopersicum,experimental,tomato,dicot,4,1.2
+26,triticum aestivum,control,wheat,monocot,4,2.175
+27,triticum aestivum,experimental,wheat,monocot,4,2.1
+28,zea mays,control,maize,monocot,4,2.7
+29,zea mays,experimental,maize,monocot,4,1.5

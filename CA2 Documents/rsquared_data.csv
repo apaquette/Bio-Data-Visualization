@@ -1,0 +1,61 @@
+Control_Experimental,rsquared,Plant,Plant_Section
+control,0.5668561590237476,All Plants,root
+experimental,0.6030972273200282,All Plants,root
+control,0.44820787920850663,All Plants,sprout
+experimental,0.28927034428794984,All Plants,sprout
+control,0.48079470198675484,allium cepa,root
+experimental,0.9583652302753426,allium cepa,root
+control,0.45199895479487845,allium tuberosum,root
+experimental,0.732590844738084,allium tuberosum,root
+control,0.9827477181888684,brassica oleracea var. capitata,root
+experimental,0.9911057328694601,brassica oleracea var. capitata,root
+control,0.995090523568749,echeveria sedum,root
+experimental,0.9446474014590285,echeveria sedum,root
+control,0.9728760717069368,helianthus annuus,root
+experimental,0.7678598629093678,helianthus annuus,root
+control,0.9376623376623376,lathyrus odoratus,root
+experimental,0.7602549246813441,lathyrus odoratus,root
+control,0.5444444444444445,lythrum salicaria,root
+experimental,0.31029023746701834,lythrum salicaria,root
+control,0.972966776343183,narcissus pseudonarcissus,root
+experimental,0.9453587529194504,narcissus pseudonarcissus,root
+control,0.6384116841624827,ocimum basilicum,root
+experimental,0.959534704228458,ocimum basilicum,root
+control,0.9389711122119326,petunia integrifolia,root
+experimental,0.9644764661579086,petunia integrifolia,root
+control,0.08383635144198529,secale cereale,root
+experimental,0.8590679094540614,secale cereale,root
+control,0.5837953091684436,solanum lycopersicum,root
+experimental,0.966484878532474,solanum lycopersicum,root
+control,0.9341016949152543,triticum aestivum,root
+experimental,0.9810810810810809,triticum aestivum,root
+control,0.8201657758527082,zea mays,root
+experimental,0.9503435254628416,zea mays,root
+control,0.9801261705013894,allium cepa,sprout
+experimental,0.6825806451612907,allium cepa,sprout
+control,0.487876664330764,allium tuberosum,sprout
+experimental,0.25286783042394007,allium tuberosum,sprout
+control,0.8495101077275544,brassica oleracea var. capitata,sprout
+experimental,0.8924086223055296,brassica oleracea var. capitata,sprout
+control,0.06580016246953702,echeveria sedum,sprout
+experimental,0.24147157190635463,echeveria sedum,sprout
+control,0.35646481178396067,helianthus annuus,sprout
+experimental,0.9726977248104008,helianthus annuus,sprout
+control,NA,lathyrus odoratus,sprout
+experimental,0.807563025210084,lathyrus odoratus,sprout
+control,0.9529745042492918,lythrum salicaria,sprout
+experimental,NA,lythrum salicaria,sprout
+control,0.5797729618163056,narcissus pseudonarcissus,sprout
+experimental,0.9864801864801865,narcissus pseudonarcissus,sprout
+control,0.9236569274269557,ocimum basilicum,sprout
+experimental,0.868733850129199,ocimum basilicum,sprout
+control,0.5536644383381866,petunia integrifolia,sprout
+experimental,0.976379477250726,petunia integrifolia,sprout
+control,0.8760079312623926,secale cereale,sprout
+experimental,0.7890489913544667,secale cereale,sprout
+control,0.870236869207003,solanum lycopersicum,sprout
+experimental,0.7656957928802588,solanum lycopersicum,sprout
+control,0.9436674277393313,triticum aestivum,sprout
+experimental,0.09803921568627454,triticum aestivum,sprout
+control,0.94421773691344,zea mays,sprout
+experimental,0.7362684951281127,zea mays,sprout

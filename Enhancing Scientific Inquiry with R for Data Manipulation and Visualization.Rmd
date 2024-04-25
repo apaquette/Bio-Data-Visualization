@@ -87,7 +87,7 @@ library(ggplot2)
 The following code loads our raw data into the bioData variable.
 
 ```{r}
-bioData <- read.csv("rawData.csv")
+bioData <- read.csv("Data/rawData.csv")
 ```
 
 ## Data Cleanup
@@ -703,7 +703,12 @@ for(plant_name in unique_plant_names){
 Finally, we output the computed R-squared values and export them to a CSV file for future reference and analysis.
 
 ```{r}
-write_csv(rsquared_data, "rsquared_data.csv") # save our rsquared values into a .csv for later use
+write_csv(rsquared_data, "Data/rsquared_data.csv") # save our rsquared values into a .csv for later use
+write_csv(bioData, "Data/bioData.csv")
+write_csv(rootLengthsData, "Data/root_lengths_data.csv")
+write_csv(sproutLengthsData, "Data/sprout_lengths_data.csv")
+write_csv(weeklyRootGrowths, "Data/weekly_root_growth.csv")
+write_csv(weeklySproutGrowths, "Data/weekly_sprout_growth.csv")
 ```
 
 # Conclusion
